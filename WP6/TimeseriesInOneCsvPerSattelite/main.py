@@ -61,11 +61,19 @@ os.chdir(inImgDir)
 csvFiles = glob.glob(inImgDir + "/*.csv")
 csvFiles.sort()
 
+ListAveCoes=[]
+ListtPixes =[]
+
 for f in range(len(csvFiles)): 
     print (csvFiles[f])
     [aveCoe,tPixels] = CsvIn.getAveBackAndArea(csvFiles[f],zonesList)
-    print ("[aveCoe,tArea]",[aveCoe,tPixels])
+    ListAveCoes+=[aveCoe]
+    ListtPixes+=[tPixels]
+
     
+print ("ListAveCoes=",ListAveCoes)
+print ("ListtPixes=",ListtPixes)
+
 # Geoimage for mask
 # print (masksFile)
 # mask = GeoImage.GeoImage(masksFile) # TO DO: USE FOREST SCRIPT FOR LINKING CLASS VALUE WITH PIXEL VALUE OF THE TWO IMAGES
