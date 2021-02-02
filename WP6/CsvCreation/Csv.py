@@ -1,4 +1,3 @@
-
 ## @package Csv
 #  This class contains Csv file with statistics about a SAR image
 #  @author Dr Milto Miltiadou
@@ -71,5 +70,3 @@ class Csv:
       f.close()
       cdir=os.getcwd()
       print ("File saved into:",cdir+"/"+i_outFileName, "  .")
-      
-

@@ -12,6 +12,7 @@ import sys
 import os
 import numpy as np
 import glob
+import CsvIn
 #import re
 
 #import subprocess
@@ -44,20 +45,27 @@ params       = vars(parser.parse_args())
 inImgDir     = params["in"   ]
 outCsvDir    = params["out"  ]
 zonesStr     = params["zones"]
-l1_list = zonesStr.split(',') # ['1','2','3','4']
+zonesList    = zonesStr.split(',') # ['1','2','3','4']
 
 print ("inImgDir     = ", inImgDir ) 
 print ("outImgDir    = ", outCsvDir)
 print ("zonesStr     = ", zonesStr )
-print ("zones        = ", l1_list  )
+print ("zones        = ", zonesList)
 cdir=os.getcwd()
 
 # create folders structure if it is missing
 # dirs=FoldersManager.creatFolders(inImgDir,outCsvDir)
   
 
-# os.chdir(inImgDir)
+os.chdir(inImgDir)
+csvFiles = glob.glob(inImgDir + "/*.csv")
+csvFiles.sort()
 
+for f in range(len(csvFiles)): 
+    print (csvFiles[f])
+    [aveCoe,tPixels] = CsvIn.getAveBackAndArea(csvFiles[f],zonesList)
+    print ("[aveCoe,tArea]",[aveCoe,tPixels])
+    
 # Geoimage for mask
 # print (masksFile)
 # mask = GeoImage.GeoImage(masksFile) # TO DO: USE FOREST SCRIPT FOR LINKING CLASS VALUE WITH PIXEL VALUE OF THE TWO IMAGES

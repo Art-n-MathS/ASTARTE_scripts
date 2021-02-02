@@ -11,7 +11,7 @@ python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTART
 
 # for each sattelite given the zones of interest, return the average time series bascattered coeffient into a single .csv file. 
 # An extra .csv file is generated with the area of each sattelite used for testing
-python TimeseriesInOneCsvPerSattelite/main.py -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level3/ERS-1" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/ERS-1/timeseries.csv" -zones [101, 102]
+python TimeseriesInOneCsvPerSattelite/main.py -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level3/ENVISAT" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/ENVISAT.csv" -zones 201,202
 
 # testing only two Sentinel images that study area is covered entirely by them for fast testing 
 # python  scripts/main.py -in Pre-processing/Level2/test -o Pre-processing/Level3 -masks /run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif
