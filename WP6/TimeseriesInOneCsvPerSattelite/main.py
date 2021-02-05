@@ -70,57 +70,43 @@ for f in range(len(csvFiles)):
     ListAveCoes+=[aveCoe]
     ListtPixes+=[tPixels]
 
-    
+print ("csvFiles",csvFiles)
 print ("ListAveCoes=",ListAveCoes)
 print ("ListtPixes=",ListtPixes)
+print (len(csvFiles), len(ListAveCoes), len(ListtPixes))
 
-# Geoimage for mask
-# print (masksFile)
-# mask = GeoImage.GeoImage(masksFile) # TO DO: USE FOREST SCRIPT FOR LINKING CLASS VALUE WITH PIXEL VALUE OF THE TWO IMAGES
-# for d in dirs:
-#    print (d)
-   # get a list of images from a given direction
-#    os.chdir(inImgDir)
-#    imgs=FoldersManager.getFilesNames(d,".tif")
-#    for img in imgs:
-#       print ("**********************************************************************")
-#       print ("Reading image: ", inImgDir+"/"+d+"/"+img)
-      # load image
-#       imgGeo = GeoImage.GeoImage(inImgDir+"/"+d+"/"+img)
-      # create csv file and import info from .tiff image
-#       fwidth = imgGeo.getPixelWidth()/1.0
-#       fheight = imgGeo.getPixelHeight()/1.0
-#       mycsv = Csv.Csv([],fwidth,fheight)
-      # get number of colums and rows
-#       rows = imgGeo.getNoOfRows()
-#       cols = imgGeo.getNoOfCols()
-      
-#       for r in range(0,rows-1):
-#          for c in range(0,cols-1):
+if (len(csvFiles)!=len(ListAveCoes) and len(ListAveCoes)!=len(ListtPixes)):
+   print ("ERROR: size of list with names of files, ave Coes and no of Pixels are not equal!")
+   exit(1)
 
-#             [x_geo, y_geo] = imgGeo.getGeolocation(c,r)
-            # if(x_geo>452189 and x_geo<486362 and y_geo>3858548 and y_geo<3888868):
-               # print (r, c, ":")
-               # print (x_geo, y_geo)
-               # print ("----------------------")
-#             classMask  = mask.getPixelValuefromGeo(x_geo,y_geo) 
-#             pixelValue = imgGeo.getPixelValue(r,c) # fine 
-#             if (imgGeo.isNoValueOrZero(pixelValue)!=1):
-               # print ("c_imgGeo of cols,r_imgGeo of rows,x_geo,y_geo,classMask,pixelValue",c, "of", cols,r,"of", rows,x_geo,y_geo,classMask,pixelValue)
-#                mycsv.addPixel(classMask,pixelValue)
-       
+# exprt data to two .csv files
+zonesStr = zonesStr.replace(",", " ")
 
-      
+faves= open(outCsvDir,"w+")
+faves.write("Filenames,")
+for i in range(len(csvFiles)-1):
+   faves.write("%s,"%csvFiles[i])
+faves.write("%s\n"%csvFiles[len(csvFiles)-1])
+faves.write("%s,"%zonesStr)
+for i in range(len(ListAveCoes)-1):
+   faves.write("%f,"%ListAveCoes[i])
+faves.write("%f"%ListAveCoes[len(ListAveCoes)-1])
+faves.close()
 
-      # go to directory for exporting .csvs
-#       os.chdir(outCsvDir+"/"+d)
+outCsvDir=outCsvDir+"pix.csv"
+faves= open(outCsvDir,"w+")
+faves.write("Filenames,")
+for i in range(len(csvFiles)-1):
+   faves.write("%s,"%csvFiles[i])
+faves.write("%s\n"%csvFiles[len(csvFiles)-1])
+faves.write("%s,"%zonesStr)
+for i in range(len(ListtPixes)-1):
+   faves.write("%f,"%ListtPixes[i])
+faves.write("%f"%ListtPixes[len(ListtPixes)-1])
+faves.close()
 
-      # export csv file to new directory
-#       mycsv.export(img+".csv")
-#       print (img+".csv saved")      
-#       print ("**********************************************************************")
-  
-# os.chdir(cdir)
+
+
 
  
 print ("   ***   EXIT   ***\n")
