@@ -85,8 +85,10 @@ zonesStr = zonesStr.replace(",", " ")
 faves= open(outCsvDir,"w+")
 faves.write("Filenames,")
 for i in range(len(csvFiles)-1):
-   faves.write("%s,"%csvFiles[i])
-faves.write("%s\n"%csvFiles[len(csvFiles)-1])
+   head, tail = os.path.split(csvFiles[i])
+   faves.write("%s,"% tail) #  [17:25]) # for Sentinel-1
+head, tail = os.path.split(csvFiles[len(csvFiles)-1])
+faves.write("%s\n"%tail) #  [17:25]) # for Sentinel-1
 faves.write("%s,"%zonesStr)
 for i in range(len(ListAveCoes)-1):
    faves.write("%f,"%ListAveCoes[i])
@@ -97,8 +99,10 @@ outCsvDir=outCsvDir+"pix.csv"
 faves= open(outCsvDir,"w+")
 faves.write("Filenames,")
 for i in range(len(csvFiles)-1):
-   faves.write("%s,"%csvFiles[i])
-faves.write("%s\n"%csvFiles[len(csvFiles)-1])
+   head, tail = os.path.split(csvFiles[i])
+   faves.write("%s,"% tail) #  [17:25]) # for Sentinel-1
+head, tail = os.path.split(csvFiles[len(csvFiles)-1])
+faves.write("%s\n"%tail) #  [17:25]) # for Sentinel-1
 faves.write("%s,"%zonesStr)
 for i in range(len(ListtPixes)-1):
    faves.write("%f,"%ListtPixes[i])
