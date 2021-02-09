@@ -19,7 +19,7 @@ python TimeseriesInOneCsvPerSattelite/main.py -in "/home/milto/Documents/ASTARTE
 # testing only two Sentinel images that study area is covered entirely by them for fast testing 
 # python  scripts/main.py -in Pre-processing/Level2/test -o Pre-processing/Level3 -masks /run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1Desc.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/DESCENDING/VH/Sentinel1_VH.csv" -zones 201,202
+python TimeseriesInOneCsvPerSattelite/mainSentinel1Desc.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/DESCENDING/VH/Sentinel1_VH.csv" -zones 201,202,302,301,401,402
 
 python TimeseriesInOneCsvPerSattelite/mainSentinel1Desc.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/DESCENDING/VV/Sentinel1_VVallzones.csv" -zones 201,202,302,301,401,402
 
