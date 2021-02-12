@@ -166,7 +166,6 @@ for i in range(len(indexes)-1):
    MeteoValuesList+=[value]
 
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
-
 favesPix.write  ("%s\n"%tail[17:25]) 
 favesPix.write  ("%s,"%zonesStr)  # zonesStr is the label of the 2nd column
 favesNoAve.write("%s\n"%tail[17:25]) 
@@ -174,6 +173,21 @@ favesNoAve.write("%s,"%zonesStr)
 fmeteoOut.write("%s\n"%tail[17:25]) 
 fmeteoOut.write("%s,"%zonesStr)
 
+while (1): # day, month, year
+   meteoLine=fMeteoData.readline()
+   meteoLine=meteoLine[0:len(meteoLine)-2]
+   meteoData=str(meteoData)
+   meteoData=meteoLine.split(",")
+   [date,value]=meteoData
+   if(value==''):
+      value=0.0
+   else:
+      value=float(value)
+   if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
+      break
+MeteoValuesList+=[value]
+   
+   
 
 
 
