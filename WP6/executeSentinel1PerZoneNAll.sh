@@ -96,6 +96,10 @@ cp $bodydir"Sentinel1_"$polarization"_201-202-301-302-401-402.csv" $bodydir"heig
 cp $bodydir"Sentinel1_"$polarization"_201-301-401.csv" $bodydir"light/Sentinel1_"$polarization"_201-301-401.csv" 
 cp $bodydir"Sentinel1_"$polarization"_202-302-402.csv" $bodydir"light/Sentinel1_"$polarization"_202-302-402.csv" 
 cp $bodydir"Sentinel1_"$polarization"_201-202-301-302-401-402.csv" $bodydir"light/Sentinel1_"$polarization"_201-202-301-302-401-402.csv" 
+# merge relevant files
+wine "/home/milto/Documents/Small Projects/CSVtools/CSVMerge/release/CSVMerge.exe" $bodydir"singles"
+wine "/home/milto/Documents/Small Projects/CSVtools/CSVMerge/release/CSVMerge.exe" $bodydir"heights"
+wine "/home/milto/Documents/Small Projects/CSVtools/CSVMerge/release/CSVMerge.exe" $bodydir"light"
 
 bodydir="/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/DESCENDING/VV/"
 polarization="VV"
@@ -125,7 +129,10 @@ cp $bodydir"Sentinel1_"$polarization"_201-202-301-302-401-402.csv" $bodydir"heig
 cp $bodydir"Sentinel1_"$polarization"_201-301-401.csv" $bodydir"light/Sentinel1_"$polarization"_201-301-401.csv" 
 cp $bodydir"Sentinel1_"$polarization"_202-302-402.csv" $bodydir"light/Sentinel1_"$polarization"_202-302-402.csv" 
 cp $bodydir"Sentinel1_"$polarization"_201-202-301-302-401-402.csv" $bodydir"light/Sentinel1_"$polarization"_201-202-301-302-401-402.csv" 
-
+# merge relevant files
+wine "/home/milto/Documents/Small Projects/CSVtools/CSVMerge/release/CSVMerge.exe" $bodydir"singles"
+wine "/home/milto/Documents/Small Projects/CSVtools/CSVMerge/release/CSVMerge.exe" $bodydir"heights"
+wine "/home/milto/Documents/Small Projects/CSVtools/CSVMerge/release/CSVMerge.exe" $bodydir"light"
 
 
 

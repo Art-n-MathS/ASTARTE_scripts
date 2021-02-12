@@ -37,4 +37,10 @@ python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTART
 python TimeseriesInOneCsvPerSattelite/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-2" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/ERS-2/ERS-2.csv" -zones 201,202
 
 
+# Sentinel ASCENDING
+python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/Sentinel-1/ASCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
+
+
+
+
 
