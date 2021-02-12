@@ -105,38 +105,92 @@ for i in indexes:
 # preparation
 zonesStr = zonesStr.replace(",", " ")
 
+# creating names of files
 outCsvDirPix  =outCsvDir+"_pix.csv"
 outCSvDirNoAve=outCsvDir+"_noAve.csv"
+oitCSvDirMeto =outCsvDir+"_Meto.csv"
 
+# opening/creating files
 favesPix  = open(outCsvDirPix  ,"w+")
 favesNoAve= open(outCSvDirNoAve,"w+")
 faves1    = open(outCsvDir     ,"w+")
+fmeteoOut = open(oitCSvDirMeto ,"w+")
 
+# Adding first label in files
 favesPix.write  ("Filenames,")
 faves1.write    ("Filenames,")
 favesNoAve.write("Filenames,")
+fmeteoOut.write ("Filenames,")
 
+# Loading file for meto data
+meteoDir      ="/home/milto/Documents/ASTARTE/ASTARTE_sample_data/Ave_DailyRain1992_2019_3days.csv"
+fMeteoData= open(meteoDir      ,"r" )
+meteoLine=fMeteoData.readline()
+meteoLine=fMeteoData.readline()
+meteoLine=meteoLine[0:len(meteoLine)-2]
+meteoData=meteoLine.split(".")
+[date,value]=meteoData
+value=float(value)
 
+# MeteoData = /home/milto/Documents/ASTARTE/ASTARTE_sample_data/Ave_DailyRain1992_2019_3days.csv
+
+#first line is the labels
+
+# exporting labels in csvs for average back coe, sum pixels, and meteo data
 for i in range(len(indexes)-1):
    head, tail = os.path.split(csvFiles[indexes[i]])
    favesPix.write  ("%s,"% tail[17:25])
    favesNoAve.write("%s,"% tail[17:25])
+   fmeteoOut.write("%s,"% tail[17:25])
+   # Also creating a list with meteo corresponding data
+   
+   while (1): # day, month, year
+      #print ("All: " , date, tail[17:25]) 
+      #print ("Day: ", date[0:2], tail[23:25])
+      #print ("Month: " , date[3:5],tail[21:23])
+      #print ("Year: " , date[8:10],tail[19:21])
+      #print ("-------------------")
+      meteoLine=fMeteoData.readline()
+      meteoLine=meteoLine[0:len(meteoLine)-2]
+      meteoData=str(meteoData)
+      meteoData=meteoLine.split(",")
+      [date,value]=meteoData
+      if(value==''):
+         value=0.0
+      else:
+         value=float(value)
+      if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
+         break
+   print (date, tail[17:25], "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++!") 
+   
+
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
+
 favesPix.write  ("%s\n"%tail[17:25]) 
 favesPix.write  ("%s,"%zonesStr)  # zonesStr is the label of the 2nd column
-
 favesNoAve.write("%s\n"%tail[17:25]) 
 favesNoAve.write("%s,"%zonesStr)
+fmeteoOut.write("%s\n"%tail[17:25]) 
+fmeteoOut.write("%s,"%zonesStr)
 
+
+
+
+# exporting values in csvs for average back coe, sum pixels, and meteo data
 for i in range(len(indexes)-1):
    favesPix.write  ("%i,"%ListtPixes [indexes[i]])
    favesNoAve.write("%f,"%ListAveCoes[indexes[i]])
+   
+   fmeteoOut.write("%f,"%ListAveCoes[indexes[i]])
 favesPix.write("%i"%ListtPixes[indexes[len(indexes)-1]])
 favesNoAve.write("%f"%ListAveCoes[indexes[len(indexes)-1]])
 
-favesNoAve.close()
-favesPix.close()
+fmeteoOut.write("%f"%ListAveCoes[indexes[len(indexes)-1]])
 
+favesNoAve.close()
+favesPix.  close()
+fmeteoOut .close()
+fMeteoData.close()
 
 # export average back coe per month
 i=0
