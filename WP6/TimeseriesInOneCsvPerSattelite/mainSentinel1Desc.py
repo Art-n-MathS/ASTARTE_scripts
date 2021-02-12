@@ -131,6 +131,7 @@ meteoLine=meteoLine[0:len(meteoLine)-2]
 meteoData=meteoLine.split(".")
 [date,value]=meteoData
 value=float(value)
+MeteoValuesList=[]
 
 # MeteoData = /home/milto/Documents/ASTARTE/ASTARTE_sample_data/Ave_DailyRain1992_2019_3days.csv
 
@@ -161,8 +162,8 @@ for i in range(len(indexes)-1):
          value=float(value)
       if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
          break
-   print (date, tail[17:25], "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++!") 
-   
+   #print (date, tail[17:25], value, "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++!") 
+   MeteoValuesList+=[value]
 
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
 
@@ -181,11 +182,11 @@ for i in range(len(indexes)-1):
    favesPix.write  ("%i,"%ListtPixes [indexes[i]])
    favesNoAve.write("%f,"%ListAveCoes[indexes[i]])
    
-   fmeteoOut.write("%f,"%ListAveCoes[indexes[i]])
+   fmeteoOut.write("%f,"%MeteoValuesList[indexes[i]])
 favesPix.write("%i"%ListtPixes[indexes[len(indexes)-1]])
 favesNoAve.write("%f"%ListAveCoes[indexes[len(indexes)-1]])
 
-fmeteoOut.write("%f"%ListAveCoes[indexes[len(indexes)-1]])
+#fmeteoOut.write("%f"%MeteoValuesList[indexes[len(indexes)-1]])
 
 favesNoAve.close()
 favesPix.  close()
