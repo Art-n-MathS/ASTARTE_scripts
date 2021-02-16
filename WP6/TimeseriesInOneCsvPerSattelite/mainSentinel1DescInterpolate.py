@@ -13,6 +13,7 @@ import os
 import numpy as np
 import glob
 import CsvIn
+import math
 #import re
 
 #import subprocess
@@ -365,7 +366,10 @@ faves1.write("\n")
 faves1.write    ("%s"%zonesStr) # label of 2nd row
 
 for i in range(len(datesStr)):
-   faves1.write(",%s"% sumAves[i])
+   if(sumAves[i]<=-0.99):
+      faves1.write(",-1")
+   else:
+      faves1.write(",%f"% (10.0*math.log(sumAves[i])))
 faves1.write("\n")
 
 

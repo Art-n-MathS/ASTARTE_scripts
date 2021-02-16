@@ -40,6 +40,14 @@ python TimeseriesInOneCsvPerSattelite/main.py -in "/run/media/milto/Seagate Expa
 # Sentinel ASCENDING
 python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/Sentinel-1/ASCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
 
+# Sentinel ASCENDING discarded data
+python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VH" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VH" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
+
+python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VV" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VV" -masks "/run/media/milto/seagate expansion drive/astarte_data/astarte-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
+
+
+
+
 
 
 

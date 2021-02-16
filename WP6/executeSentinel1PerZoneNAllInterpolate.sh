@@ -4,7 +4,7 @@
 cd /home/milto/Documents/ASTARTE/Scripts/WP6
 
 # 201
-python TimeseriesInOneCsvPerSattelite/mainSentinel1DescInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/DESCENDING/VH/Sentinel1_VH_201.csv" -zones 201
+./python TimeseriesInOneCsvPerSattelite/mainSentinel1DescInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/DESCENDING/VH/Sentinel1_VH_201.csv" -zones 201
 
 python TimeseriesInOneCsvPerSattelite/mainSentinel1DescInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/DESCENDING/VV/Sentinel1_VV_201.csv" -zones 201
 

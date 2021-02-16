@@ -21,6 +21,9 @@ import math
 #import Csv
 #import GeoFunctions
 
+# NOTE: LAST IMAGE OF THE TIME SERIES IS IGNORED 
+# QUICK FIX: COPY PASTE AN IMAGE AND RENAME IT SO THAT IT SEEMS TO BE THE LAST IN THE SERIES, 
+# A ZERO WILL APPEAR AT THE END THAT CAN BE IGNORED
 
 #  @details python main.py -in <inputDir> -out <outputDir> -zones <[zone1,zone2,...,zoneN]>
 #  @notes This is for testing that libraries are installed properly. It just reads a GeoTIFF image and makes a copy
@@ -114,12 +117,10 @@ oitCSvDirMeto =outCsvDir+"_Meto.csv"
 # opening/creating files
 favesPix  = open(outCsvDirPix  ,"w+")
 favesNoAve= open(outCSvDirNoAve,"w+")
-faves1    = open(outCsvDir     ,"w+")
 fmeteoOut = open(oitCSvDirMeto ,"w+")
 
 # Adding first label in files
 favesPix.write  ("Filenames,")
-faves1.write    ("Filenames,")
 favesNoAve.write("Filenames,")
 fmeteoOut.write ("Filenames,")
 
@@ -179,11 +180,11 @@ fmeteoOut.write("%s,"%zonesStr)
 
 value=0.0
 while (1 and date[8:10]): # day, month, year
-   print ("All: " , date, tail[17:25]) 
-   print ("Day: ", date[0:2], tail[23:25])
-   print ("Month: " , date[3:5],tail[21:23])
-   print ("Year: " , date[8:10],tail[19:21])
-   print ("-------------------")
+   #print ("All: " , date, tail[17:25]) 
+   #print ("Day: ", date[0:2], tail[23:25])
+   #print ("Month: " , date[3:5],tail[21:23])
+   #print ("Year: " , date[8:10],tail[19:21])
+   #print ("-------------------")
    meteoLine=fMeteoData.readline()
    meteoLine=meteoLine[0:len(meteoLine)-2]
    meteoData=str(meteoData)
@@ -221,42 +222,155 @@ favesPix.  close()
 fmeteoOut .close()
 fMeteoData.close()
 
-# export average back coe per month
-i=0
-head, tail = os.path.split(csvFiles[indexes[0]])
-tail1= tail[17:23]
-faves1.write("%s,"% tail[17:23])
-while i<len(indexes)-1:
-   head, tail = os.path.split(csvFiles[indexes[i]])
-   if (tail1 != tail[17:23]):
-      faves1.write("%s,"% tail[17:23])
-   i=i+1
-   tail1= tail[17:23]
-faves1.write("%s\n"%tail[17:23]) 
+
+# exporting labels
+# *** START HARCODED CONSTANTS FOR SENTINEL !!!
+MMS = 9
+MME = 1
+YYYYS = 2014
+YYYYE = 2021
+# *** END HARCODED CONSTANTS FOR SENTINEL !!!
+
+MMC=MMS
+YYYYC=YYYYS
+datesStr=[]
+while(1):
+   if (MMC==10 or MMC==11 or MMC==12):
+      datesStr+= [str(YYYYC)+str(MMC)]
+   else:
+      datesStr+= [str(YYYYC)+"0"+str(MMC)]
+   if (MMC==MME and YYYYC==YYYYE):
+      break
+   MMC+=1
+   MMC=MMC%12
+   if MMC==0:
+      MMC=12
+   if MMC==1:
+      YYYYC+=1
 
 
-faves1.write    ("%s,"%zonesStr)
+# Define METEO THRESHOLD
+MeteoThres=7.1
+ListAveCoesClean=[] # -1 for meteo below thres
+
+for i in range(len(ListAveCoes)):
+   if (MeteoValuesList[i]<MeteoThres):
+      ListAveCoesClean+=[ListAveCoes[i]]
+   else:
+      ListAveCoesClean+=[-1]
+      
+#print (ListAveCoesClean)
+
+
 i=0
-while i<len(indexes)-1:
+nnAve=-1
+nAve =-1
+cAve =-1
+pAve =-1
+ppAve=-1
+nnMet=-1
+nMet =-1
+cMet =-1
+pMet =-1
+ppMet=-1
+
+sumAves=[]
+for d in range(len(datesStr)):
+   currentMonth=datesStr[d]
    sumAve=0
-   pixs=0
+   pixs=0 
    nO=0
    head, tail = os.path.split(csvFiles[indexes[i]])
-   currentMonth=tail[21:23]
-   while (i<len(indexes) and currentMonth==tail[21:23]):
+   #print (currentMonth[4:6],tail[21:23])
+
+   while (i<len(indexes)-1 and currentMonth[4:6]==tail[21:23]):
       pixs=pixs+1
-      sumAve=sumAve+float(ListAveCoes[indexes[i]])
+      
+      # Loading 5 back aveverage coes to enable interpolation
+      ppAve=pAve
+      pAve=cAve
+      cAve=float(ListAveCoes[indexes[i]])
+      if(i<len(indexes)-2):
+         nAve=float(ListAveCoes[indexes[i+1]])
+      else:
+         nAve=-1
+      if(i<len(indexes)-3):
+         nnAve=float(ListAveCoes[indexes[i+2]])
+      else:
+         nnAve=-1
+      #print (ppAve,pAve,cAve,nAve,nnAve)
+      
+      # Loading 5 meteo continues corresponding meteo values 
+      ppMet=pMet
+      pMet=cMet
+      cMet=float(MeteoValuesList[indexes[i]])
+      if(i<len(indexes)-2):
+         nMet=float(MeteoValuesList[indexes[i+1]])
+      else:
+         nMet=-1
+      if(i<len(indexes)-3):
+         nnMet=float(MeteoValuesList[indexes[i+2]])
+      else:
+         nnMet=-1
+      #print (round(ppMet),round(pMet),round(cMet),round(nMet),round(nnMet))
+      
+      
+      if(ListAveCoesClean[indexes[i]]>0):
+         sumAve=sumAve+float(ListAveCoesClean[indexes[i]]) 
+      else:
+         pixs-=1     
+      #sumAve=sumAve+float(ListAveCoes[indexes[i]])
       i=i+1
       head, tail = os.path.split(csvFiles[indexes[i]])
-      
-   sumAve=sumAve/float(pixs)
+   if (pixs!=0):
+      sumAve=sumAve/float(pixs)
+   else:
+      count=0.0
+      sumAve=0.0
+      if(ppAve!=-1):
+         count+=1.0
+         sumAve+=ppAve
+      if(pAve!=-1):
+         count+=1.0
+         sumAve+=pAve
+      if(cAve!=-1):
+         count+=1.0
+         sumAve+=cAve
+      if(nAve!=-1):
+         count+=1.0
+         sumAve+=nAve
+      if(nnAve!=-1):
+         count+=1.0
+         sumAve+=nAve
+      if count>0.00001:
+         sumAve=sumAve/count
+      else:
+         sumAve=-1
+         
+         
+   # else sumeAve=0   
+   sumAves+=[sumAve]
 
-   faves1.write("%f,"%(sumAve))
+if (len(sumAves)!=len(datesStr)):
+   print ("ERROR: sumAves not equal to datesStr!!")
+   exit(1)
+   
+# export average back coe per month
+faves1    = open(outCsvDir     ,"w+")
+faves1.write    ("Filenames")  # label of 1st row
 
-faves1.write("%f"%ListAveCoes[indexes[len(indexes)-1]])
+for i in range(len(datesStr)):
+   faves1.write(",%s"% datesStr[i])
+faves1.write("\n")
+
+faves1.write    ("%s"%zonesStr) # label of 2nd row
+
+for i in range(len(datesStr)):
+   faves1.write(",%s"% 10*math.log(abs(sumAves[i])))
+faves1.write("\n")
 
 
-faves1.close()
+
 
 
 
