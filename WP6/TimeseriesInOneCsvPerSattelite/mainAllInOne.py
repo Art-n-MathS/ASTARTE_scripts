@@ -129,13 +129,13 @@ indexes = list(range(0, len(dates)))
 for d in range(len(dates)):
    for i in range(len(csvFiles)):
       head, tail = os.path.split(csvFiles[i])
-      if(dates[d]==tail[17:25]):
+      if(dates[d]==tail[IDS:(IDS+8)]):
          indexes[d]=i
          
          
 for i in indexes: 
    ead, tail = os.path.split(csvFiles[i])
-   #print (i, tail[17:25])
+
      
    
 
@@ -176,9 +176,9 @@ MeteoValuesList=[]
 # exporting labels in csvs for average back coe, sum pixels, and meteo data
 for i in range(len(indexes)-1):
    head, tail = os.path.split(csvFiles[indexes[i]])
-   favesPix.write  ("%s,"% tail[17:25])
-   favesNoAve.write("%s,"% tail[17:25])
-   fmeteoOut.write("%s,"% tail[17:25])
+   favesPix.write  ("%s,"% tail[IDS:(IDS+8)])
+   favesNoAve.write("%s,"% tail[IDS:(IDS+8)])
+   fmeteoOut.write("%s,"% tail[IDS:(IDS+8)])
    # Also creating a list with meteo corresponding data
    value=0.0
    while (1 and date[8:10]): # day, month, year
@@ -199,17 +199,17 @@ for i in range(len(indexes)-1):
          value=0.0
       else:
          value=float(value)
-      if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
+      if(date[0:2]==tail[(IDS+6):(IDS+8)] and date[3:5]==tail[(IDS+4):(IDS+6)] and date[8:10]==tail[(IDS+2):(IDS+4)]): 
          break
 
    MeteoValuesList+=[value]
 
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
-favesPix.write  ("%s\n"%tail[17:25]) 
+favesPix.write  ("%s\n"%tail[IDS:(IDS+8)]) 
 favesPix.write  ("%s,"%zonesStr)  # zonesStr is the label of the 2nd column
-favesNoAve.write("%s\n"%tail[17:25]) 
+favesNoAve.write("%s\n"%tail[IDS:(IDS+8)]) 
 favesNoAve.write("%s,"%zonesStr)
-fmeteoOut.write("%s\n"%tail[17:25]) 
+fmeteoOut.write("%s\n"%tail[IDS:(IDS+8)]) 
 fmeteoOut.write("%s,"%zonesStr)
 
 value=0.0
@@ -231,9 +231,9 @@ while (1 and date[8:10]): # day, month, year
       value=0.0
    else:
       value=float(value)
-   if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
+   if(date[0:2]==tail[(IDS+6):(IDS+8)] and date[3:5]==tail[(IDS+4):(IDS+6)] and date[8:10]==tail[(IDS+2):(IDS+4)]): 
       break
-
+      
 MeteoValuesList+=[value]
    
    

@@ -6,65 +6,65 @@ cd /home/milto/Documents/ASTARTE/Scripts/WP6
 # 201
 python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_201.csv" -zones 201 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_201.csv" -zones 201
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_201.csv" -zones 201 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 # 202
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_202.csv" -zones 202
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_202.csv" -zones 202 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_202.csv" -zones 202
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_202.csv" -zones 202 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 
 # 201,202
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_201-202.csv" -zones 201,202
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_201-202.csv" -zones 201,202 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_201-202.csv" -zones 201,202
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_201-202.csv" -zones 201,202 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 # 302
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_302.csv" -zones 302
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_302.csv" -zones 302 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_302.csv" -zones 302
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_302.csv" -zones 302 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 # 301
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_301.csv" -zones 301
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_301.csv" -zones 301 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_301.csv" -zones 301
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_301.csv" -zones 301 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 
 
 # 302,301
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_301-302.csv" -zones 301,302
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_301-302.csv" -zones 301,302 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_301-302.csv" -zones 301,302
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_301-302.csv" -zones 301,302 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 # 401
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_401.csv" -zones 401
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_401.csv" -zones 401 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_401.csv" -zones 401
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_401.csv" -zones 401 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 # 402
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_402.csv" -zones 402
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_402.csv" -zones 402 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_402.csv" -zones 402
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_402.csv" -zones 402 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 # 401,402 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_401-402.csv" -zones 401,402
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_401-402.csv" -zones 401,402 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_401-402.csv" -zones 401,402
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_401-402.csv" -zones 401,402 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 # 201,301,401
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_201-301-401.csv" -zones 201,301,401
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_201-301-401.csv" -zones 201,301,401 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_201-301-401.csv" -zones 201,301,401
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_201-301-401.csv" -zones 201,301,401 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 # 202,302,402
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_202-302-402.csv" -zones 202,302,402
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_202-302-402.csv" -zones 202,302,402 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_202-302-402.csv" -zones 202,302,402
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_202-302-402.csv" -zones 202,302,402 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 # 201,202,301,302,401,402
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_201-202-301-302-401-402.csv" -zones 201,202,301,302,401,402
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/Sentinel1_VH_201-202-301-302-401-402.csv" -zones 201,202,301,302,401,402 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
-python TimeseriesInOneCsvPerSattelite/mainSentinel1AscInterpolate.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_201-202-301-302-401-402.csv" -zones 201,202,301,302,401,402
+python TimeseriesInOneCsvPerSattelite/mainAllInOne.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VV/Sentinel1_VV_201-202-301-302-401-402.csv" -zones 201,202,301,302,401,402 -MS 9 -ME 1 -YS 2014 -YE 2021 -IDS 17
 
 
 
