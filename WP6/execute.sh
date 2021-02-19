@@ -23,29 +23,53 @@ python TimeseriesInOneCsvPerSattelite/mainSentinel1Desc.py -in "/run/media/milto
 
 python TimeseriesInOneCsvPerSattelite/mainSentinel1Desc.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING/VV/" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/DESCENDING/VV/Sentinel1_VVallzones.csv" -zones 201,202,302,301,401,402
 
+# **** CSV CREATION FOR ALL DATA ***
+# ERS-1 nonNan
+python  CsvCreation/mainNoNan.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/ERS-2/" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-2" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
 
-
-# ERS-1
-python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/ERS-1" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-1" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
-
-python TimeseriesInOneCsvPerSattelite/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-1" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/ERS-1/ERS-1.csv" -zones 201,202
-
-
-# ERS-2
-python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/ERS-2" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-2" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
-
-python TimeseriesInOneCsvPerSattelite/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-2" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/ERS-2/ERS-2.csv" -zones 201,202
-
+python  CsvCreation/mainNoNan.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/ERS-1/" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-1" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
 
 # Sentinel ASCENDING
 python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/Sentinel-1/ASCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
 
-# Sentinel ASCENDING discarded data
-python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VH" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VH" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
-
-python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VV" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VV" -masks "/run/media/milto/seagate expansion drive/astarte_data/astarte-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
+# Sentinel DESCENDING
+python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/Sentinel-1/DESCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
 
 
+
+# ERS-1
+#python  CsvCreation/mainNoNan.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/ERS-1" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-1" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
+
+#python TimeseriesInOneCsvPerSattelite/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-1" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/ERS-1/ERS-1.csv" -zones 201,202
+
+
+# ERS-2
+#python  CsvCreation/mainNoNan.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/ERS-2" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-2" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
+
+#python TimeseriesInOneCsvPerSattelite/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-2" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/ERS-2/ERS-2.csv" -zones 201,202
+
+
+
+# Sentinel ASCENDING discarded data # we did the mosaic by the end
+# python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VH" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VH" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
+
+# python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VV" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3-discarded_data/Sentinel-1/ASCENDING/Before Mosaic VV" -masks "/run/media/milto/seagate expansion drive/astarte_data/astarte-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
+
+
+# all Sentinel1 ascending and descending 
+./executeSentinel1PerZoneNAllInterpolate.sh 
+./executeSentinel1_ASc_PerZoneNAllInterpolate.sh
+./executeENVISATPerZoneNAllInterpolate.sh
+
+
+# create csv 2020
+python  CsvCreation/main.py -in "/run/media/milto/My Passport/ASTARTE_Data/Level2/Sentinel-1/ASCENDING/2020/VH" -o "/run/media/milto/My Passport/ASTARTE_Data/Level3/Sentinel-1/ASCENDING/2020/VH" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
+
+python  CsvCreation/main.py -in "/run/media/milto/My Passport/ASTARTE_Data/Level2/Sentinel-1/ASCENDING/2020/VV" -o "/run/media/milto/My Passport/ASTARTE_Data/Level3/Sentinel-1/ASCENDING/2020/VV" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
+
+python  CsvCreation/main.py -in "/run/media/milto/My Passport/ASTARTE_Data/Level2/Sentinel-1/DESCENDING/2020/VH" -o "/run/media/milto/My Passport/ASTARTE_Data/Level3/Sentinel-1/DESCENDING/2020/VH" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
+
+python  CsvCreation/main.py -in "/run/media/milto/My Passport/ASTARTE_Data/Level2/Sentinel-1/DESCENDING/2020/VV" -o "/run/media/milto/My Passport/ASTARTE_Data/Level3/Sentinel-1/DESCENDING/2020/VV" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
 
 
 

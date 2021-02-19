@@ -365,8 +365,14 @@ faves1.write("\n")
 
 faves1.write    ("%s"%zonesStr) # label of 2nd row
 
+print (sumAves)
 for i in range(len(datesStr)):
-   faves1.write(",%s"% 10*math.log(abs(sumAves[i])))
+   if(sumAves[i]<=-0.99):
+      faves1.write(",-1")
+   else:
+      result=10.0*math.log(sumAves[i])
+      sresult="{:.5f}".format(result)
+      faves1.write(",%s"% (sresult))
 faves1.write("\n")
 
 

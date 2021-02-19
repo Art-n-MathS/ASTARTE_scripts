@@ -66,7 +66,7 @@ class Csv:
       f=open(i_outFileName,"w+")
       f.write("classes,pixelsNo,areas,backcoes,pixelX,pixelY\n")
       for i in range (self.noOfMasks):
-         f.write("%i,%i,%.2f,%.2f,%.2f,%.2f\n" %(self.classes[i], self.pixelsNo[i], self.areas[i], self.backcoes[i]/self.pixelsNo[i], self.pixelX, self.pixelY))
+         f.write("%i,%i,%.5f,%.5f,%.5f,%.5f\n" %(self.classes[i], self.pixelsNo[i], self.areas[i], self.backcoes[i]/self.pixelsNo[i], self.pixelX, self.pixelY))
       f.close()
       cdir=os.getcwd()
       print ("File saved into:",cdir+"/"+i_outFileName, "  .")
