@@ -35,6 +35,11 @@ python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTART
 # Sentinel DESCENDING
 python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/Sentinel-1/DESCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
 
+# Sentinel ENVISAT 
+python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/Sentinel-1/DESCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
+
+
+
 
 
 # ERS-1

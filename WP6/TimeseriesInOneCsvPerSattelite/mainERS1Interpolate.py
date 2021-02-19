@@ -1,3 +1,7 @@
+
+      
+      
+      
 ## package main
 #  @brief 
 #
@@ -86,7 +90,7 @@ if (len(csvFiles)!=len(ListAveCoes) and len(ListAveCoes)!=len(ListtPixes)):
 dates= []
 for i in range(len(csvFiles)):
    head, tail = os.path.split(csvFiles[i])
-   dates=dates+[tail[17:25]]
+   dates=dates+[tail[14:22]]
    
 dates.sort()
 
@@ -95,13 +99,13 @@ indexes = list(range(0, len(dates)))
 for d in range(len(dates)):
    for i in range(len(csvFiles)):
       head, tail = os.path.split(csvFiles[i])
-      if(dates[d]==tail[17:25]):
+      if(dates[d]==tail[14:22]):
          indexes[d]=i
          
          
 for i in indexes: 
    ead, tail = os.path.split(csvFiles[i])
-   #print (i, tail[17:25])
+
      
    
 
@@ -142,17 +146,12 @@ MeteoValuesList=[]
 # exporting labels in csvs for average back coe, sum pixels, and meteo data
 for i in range(len(indexes)-1):
    head, tail = os.path.split(csvFiles[indexes[i]])
-   favesPix.write  ("%s,"% tail[17:25])
-   favesNoAve.write("%s,"% tail[17:25])
-   fmeteoOut.write("%s,"% tail[17:25])
+   favesPix.write  ("%s,"% tail[14:22])
+   favesNoAve.write("%s,"% tail[14:22])
+   fmeteoOut.write("%s,"% tail[14:22])
    # Also creating a list with meteo corresponding data
    value=0.0
    while (1 and date[8:10]): # day, month, year
-      #print ("All: " , date, tail[17:25]) 
-      #print ("Day: ", date[0:2], tail[23:25])
-      #print ("Month: " , date[3:5],tail[21:23])
-      #print ("Year: " , date[8:10],tail[19:21])
-      #print ("-------------------")
       meteoLine=fMeteoData.readline()
       if (meteoLine==""):
          value=0.0
@@ -165,26 +164,20 @@ for i in range(len(indexes)-1):
          value=0.0
       else:
          value=float(value)
-      if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
+      if(date[0:2]==tail[20:22] and date[3:5]==tail[18:20] and date[8:10]==tail[16:18]):
          break
-   #print (date, tail[17:25], value, "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++!") 
    MeteoValuesList+=[value]
 
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
-favesPix.write  ("%s\n"%tail[17:25]) 
+favesPix.write  ("%s\n"%tail[14:22]) 
 favesPix.write  ("%s,"%zonesStr)  # zonesStr is the label of the 2nd column
-favesNoAve.write("%s\n"%tail[17:25]) 
+favesNoAve.write("%s\n"%tail[14:22]) 
 favesNoAve.write("%s,"%zonesStr)
-fmeteoOut.write("%s\n"%tail[17:25]) 
+fmeteoOut.write("%s\n"%tail[14:22]) 
 fmeteoOut.write("%s,"%zonesStr)
 
 value=0.0
 while (1 and date[8:10]): # day, month, year
-   #print ("All: " , date, tail[17:25]) 
-   #print ("Day: ", date[0:2], tail[23:25])
-   #print ("Month: " , date[3:5],tail[21:23])
-   #print ("Year: " , date[8:10],tail[19:21])
-   #print ("-------------------")
    meteoLine=fMeteoData.readline()
    meteoLine=meteoLine[0:len(meteoLine)-2]
    meteoData=str(meteoData)
@@ -197,9 +190,9 @@ while (1 and date[8:10]): # day, month, year
       value=0.0
    else:
       value=float(value)
-   if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
+   if(date[0:2]==tail[20:22] and date[3:5]==tail[18:20] and date[8:10]==tail[16:18]):
       break
-   print (date, tail[17:25], value, "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++!") 
+
 MeteoValuesList+=[value]
    
    
@@ -322,31 +315,10 @@ for d in range(len(datesStr)):
       #sumAve=sumAve+float(ListAveCoes[indexes[i]])
       i=i+1
       head, tail = os.path.split(csvFiles[indexes[i]])
-   if (pixs!=0):
+   if (sumAve>0.0000001):
       sumAve=sumAve/float(pixs)
    else:
-      count=0.0
       sumAve=0.0
-      if(ppAve!=-1):
-         count+=1.0
-         sumAve+=ppAve
-      if(pAve!=-1):
-         count+=1.0
-         sumAve+=pAve
-      if(cAve!=-1):
-         count+=1.0
-         sumAve+=cAve
-      if(nAve!=-1):
-         count+=1.0
-         sumAve+=nAve
-      if(nnAve!=-1):
-         count+=1.0
-         sumAve+=nAve
-      if count>0.00001:
-         sumAve=sumAve/count
-      else:
-         sumAve=-1
-         
          
    # else sumeAve=0   
    sumAves+=[sumAve]
@@ -367,8 +339,7 @@ faves1.write    ("%s"%zonesStr) # label of 2nd row
 
 print (sumAves)
 for i in range(len(datesStr)):
-      result=sumAves[i]
-      faves1.write(",%5f"% (result))
+      faves1.write(",%f"% (sumAves[i]))
 faves1.write("\n")
 
 

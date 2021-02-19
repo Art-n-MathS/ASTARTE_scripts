@@ -25,7 +25,7 @@ import math
 # QUICK FIX: COPY PASTE AN IMAGE AND RENAME IT SO THAT IT SEEMS TO BE THE LAST IN THE SERIES, 
 # A ZERO WILL APPEAR AT THE END THAT CAN BE IGNORED
 
-#  @details python main.py -in <inputDir> -out <outputDir> -zones <[zone1,zone2,...,zoneN]>
+#  @details python main.py -in <inputDir> -out <outputDir> -zones <[zone1,zone2,...,zoneN]> -MS <Starting Month> -ME <Ending Month> -YS <Starting year> -YE <endinding year>
 #  @notes This is for testing that libraries are installed properly. It just reads a GeoTIFF image and makes a copy
 
 
@@ -43,13 +43,47 @@ parser.add_argument("-zones",
      required=True,
      help="a list of zones that will be merged into one and exported into that csv file, comma separated without spaces in between",
      metavar='<string>')
+parser.add_argument("-MS",
+     required=True,
+     help="starting month of the time series",
+     metavar='<string>')
+parser.add_argument("-ME",
+     required=True,
+     help="End month of the time series",
+     metavar='<string>')
+parser.add_argument("-YS",
+     required=True,
+     help="Start year of the time series",
+     metavar='<string>')
+parser.add_argument("-YE",
+     required=True,
+     help="End year of the time series",
+     metavar='<string>')
+parser.add_argument("-IDS",
+     required=True,
+     help="Index of first character that the date starts in the name of the image",
+     metavar='<string>')
+     
+     
+# exporting labels
+# *** START HARCODED CONSTANTS FOR SENTINEL !!!
+MMS = 9
+MME = 1
+YYYYS = 2014
+YYYYE = 2021 
+# *** END HARCODED CONSTANTS FOR SENTINEL !!!
 
 
 params       = vars(parser.parse_args())
-inImgDir     = params["in"   ]
-outCsvDir    = params["out"  ]
-zonesStr     = params["zones"]
+inImgDir     = params["in"     ]
+outCsvDir    = params["out"    ]
+zonesStr     = params["zones"  ]
 zonesList    = zonesStr.split(',') # ['1','2','3','4']
+MMS          = int(params["MS" ] )
+MME          = int(params["ME" ] )
+YYYYS        = int(params["YS" ] )
+YYYYE        = int(params["YE" ] )
+IDS          = int(params["IDS"] )
 
 print ("inImgDir     = ", inImgDir ) 
 print ("outImgDir    = ", outCsvDir)
@@ -86,7 +120,7 @@ if (len(csvFiles)!=len(ListAveCoes) and len(ListAveCoes)!=len(ListtPixes)):
 dates= []
 for i in range(len(csvFiles)):
    head, tail = os.path.split(csvFiles[i])
-   dates=dates+[tail[17:25]]
+   dates=dates+[tail[IDS:(IDS+8)]]
    
 dates.sort()
 
@@ -167,7 +201,7 @@ for i in range(len(indexes)-1):
          value=float(value)
       if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
          break
-   #print (date, tail[17:25], value, "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++!") 
+
    MeteoValuesList+=[value]
 
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
@@ -199,7 +233,7 @@ while (1 and date[8:10]): # day, month, year
       value=float(value)
    if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
       break
-   print (date, tail[17:25], value, "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++!") 
+
 MeteoValuesList+=[value]
    
    
@@ -223,13 +257,6 @@ fmeteoOut .close()
 fMeteoData.close()
 
 
-# exporting labels
-# *** START HARCODED CONSTANTS FOR SENTINEL !!!
-MMS = 9
-MME = 1
-YYYYS = 2014
-YYYYE = 2021
-# *** END HARCODED CONSTANTS FOR SENTINEL !!!
 
 MMC=MMS
 YYYYC=YYYYS
@@ -251,7 +278,7 @@ while(1):
 
 # Define METEO THRESHOLD
 MeteoThres=7.1
-ListAveCoesClean=[] # -1 for meteo below thres
+ListAveCoesClean=[] # -1000 for meteo below thres
 
 for i in range(len(ListAveCoes)):
    if (MeteoValuesList[i]<MeteoThres):
@@ -263,16 +290,16 @@ for i in range(len(ListAveCoes)):
 
 
 i=0
-nnAve=-1
-nAve =-1
-cAve =-1
-pAve =-1
-ppAve=-1
-nnMet=-1
-nMet =-1
-cMet =-1
-pMet =-1
-ppMet=-1
+nnAve=-1000
+nAve =-1000
+cAve =-1000
+pAve =-1000
+ppAve=-1000
+nnMet=-1000
+nMet =-1000
+cMet =-1000
+pMet =-1000
+ppMet=-1000
 
 sumAves=[]
 for d in range(len(datesStr)):
@@ -293,11 +320,11 @@ for d in range(len(datesStr)):
       if(i<len(indexes)-2):
          nAve=float(ListAveCoes[indexes[i+1]])
       else:
-         nAve=-1
+         nAve=-1000
       if(i<len(indexes)-3):
          nnAve=float(ListAveCoes[indexes[i+2]])
       else:
-         nnAve=-1
+         nnAve=-1000
       #print (ppAve,pAve,cAve,nAve,nnAve)
       
       # Loading 5 meteo continues corresponding meteo values 
@@ -307,11 +334,11 @@ for d in range(len(datesStr)):
       if(i<len(indexes)-2):
          nMet=float(MeteoValuesList[indexes[i+1]])
       else:
-         nMet=-1
+         nMet=-1000
       if(i<len(indexes)-3):
          nnMet=float(MeteoValuesList[indexes[i+2]])
       else:
-         nnMet=-1
+         nnMet=-1000
       #print (round(ppMet),round(pMet),round(cMet),round(nMet),round(nnMet))
       
       
@@ -327,25 +354,25 @@ for d in range(len(datesStr)):
    else:
       count=0.0
       sumAve=0.0
-      if(ppAve!=-1):
+      if(ppAve>-999):
          count+=1.0
          sumAve+=ppAve
-      if(pAve!=-1):
+      if(pAve>-999):
          count+=1.0
          sumAve+=pAve
-      if(cAve!=-1):
+      if(cAve>-999):
          count+=1.0
          sumAve+=cAve
-      if(nAve!=-1):
+      if(nAve>-999):
          count+=1.0
          sumAve+=nAve
-      if(nnAve!=-1):
+      if(nnAve>-999):
          count+=1.0
          sumAve+=nAve
       if count>0.00001:
          sumAve=sumAve/count
       else:
-         sumAve=-1
+         sumAve=-1000
          
          
    # else sumeAve=0   

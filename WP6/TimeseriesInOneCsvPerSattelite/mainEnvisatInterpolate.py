@@ -86,7 +86,8 @@ if (len(csvFiles)!=len(ListAveCoes) and len(ListAveCoes)!=len(ListtPixes)):
 dates= []
 for i in range(len(csvFiles)):
    head, tail = os.path.split(csvFiles[i])
-   dates=dates+[tail[17:25]]
+   dates=dates+[tail[14:22]]
+
    
 dates.sort()
 
@@ -95,7 +96,7 @@ indexes = list(range(0, len(dates)))
 for d in range(len(dates)):
    for i in range(len(csvFiles)):
       head, tail = os.path.split(csvFiles[i])
-      if(dates[d]==tail[17:25]):
+      if(dates[d]==tail[14:22]):
          indexes[d]=i
          
          
@@ -142,9 +143,9 @@ MeteoValuesList=[]
 # exporting labels in csvs for average back coe, sum pixels, and meteo data
 for i in range(len(indexes)-1):
    head, tail = os.path.split(csvFiles[indexes[i]])
-   favesPix.write  ("%s,"% tail[17:25])
-   favesNoAve.write("%s,"% tail[17:25])
-   fmeteoOut.write("%s,"% tail[17:25])
+   favesPix.write  ("%s,"% tail[14:22])
+   favesNoAve.write("%s,"% tail[14:22])
+   fmeteoOut.write("%s,"% tail[14:22])
    # Also creating a list with meteo corresponding data
    value=0.0
    while (1 and date[8:10]): # day, month, year
@@ -165,17 +166,17 @@ for i in range(len(indexes)-1):
          value=0.0
       else:
          value=float(value)
-      if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
+      if(date[0:2]==tail[20:22] and date[3:5]==tail[18:20] and date[8:10]==tail[16:18]):
          break
    #print (date, tail[17:25], value, "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++!") 
    MeteoValuesList+=[value]
 
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
-favesPix.write  ("%s\n"%tail[17:25]) 
+favesPix.write  ("%s\n"%tail[14:22]) 
 favesPix.write  ("%s,"%zonesStr)  # zonesStr is the label of the 2nd column
-favesNoAve.write("%s\n"%tail[17:25]) 
+favesNoAve.write("%s\n"%tail[14:22]) 
 favesNoAve.write("%s,"%zonesStr)
-fmeteoOut.write("%s\n"%tail[17:25]) 
+fmeteoOut.write("%s\n"%tail[14:22]) 
 fmeteoOut.write("%s,"%zonesStr)
 
 value=0.0
@@ -197,9 +198,8 @@ while (1 and date[8:10]): # day, month, year
       value=0.0
    else:
       value=float(value)
-   if(date[0:2]==tail[23:25] and date[3:5]==tail[21:23] and date[8:10]==tail[19:21]):
+   if(date[0:2]==tail[20:22] and date[3:5]==tail[18:20] and date[8:10]==tail[16:18]):
       break
-   print (date, tail[17:25], value, "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++!") 
 MeteoValuesList+=[value]
    
    
@@ -226,9 +226,9 @@ fMeteoData.close()
 # exporting labels
 # *** START HARCODED CONSTANTS FOR SENTINEL !!!
 MMS = 9
-MME = 1
-YYYYS = 2014
-YYYYE = 2021
+MME = 12
+YYYYS = 2002
+YYYYE = 2010
 # *** END HARCODED CONSTANTS FOR SENTINEL !!!
 
 MMC=MMS
@@ -253,11 +253,20 @@ while(1):
 MeteoThres=7.1
 ListAveCoesClean=[] # -1 for meteo below thres
 
+
 for i in range(len(ListAveCoes)):
    if (MeteoValuesList[i]<MeteoThres):
       ListAveCoesClean+=[ListAveCoes[i]]
    else:
       ListAveCoesClean+=[-1]
+      
+# Define Pixels number Threshold
+pixNoThres=10000
+print (ListtPixes)
+for i in range(len(ListAveCoes)):
+   if (ListtPixes[i]<pixNoThres):
+      ListAveCoesClean[i]=-1
+      
       
 #print (ListAveCoesClean)
 
@@ -278,78 +287,67 @@ sumAves=[]
 for d in range(len(datesStr)):
    currentMonth=datesStr[d]
    sumAve=0
+   cAve=1
    pixs=0 
    nO=0
    head, tail = os.path.split(csvFiles[indexes[i]])
    #print (currentMonth[4:6],tail[21:23])
 
-   while (i<len(indexes)-1 and currentMonth[4:6]==tail[21:23]):
+   while (i<len(indexes)-1 and currentMonth[4:6]==tail[18:20]):
       pixs=pixs+1
       
       # Loading 5 back aveverage coes to enable interpolation
-      ppAve=pAve
-      pAve=cAve
-      cAve=float(ListAveCoes[indexes[i]])
-      if(i<len(indexes)-2):
-         nAve=float(ListAveCoes[indexes[i+1]])
-      else:
-         nAve=-1
-      if(i<len(indexes)-3):
-         nnAve=float(ListAveCoes[indexes[i+2]])
-      else:
-         nnAve=-1
+      #ppAve=pAve
+      #pAve=cAve
+      #cAve=float(ListAveCoesClean[indexes[i]])
+      #if(i<len(indexes)-2):
+      #   nAve=float(ListAveCoesClean[indexes[i+1]])
+      #else:
+      #   nAve=-1
+      #if(i<len(indexes)-3):
+      #   nnAve=float(ListAveCoesClean[indexes[i+2]])
+      #else:
+      #   nnAve=-1
       #print (ppAve,pAve,cAve,nAve,nnAve)
       
-      # Loading 5 meteo continues corresponding meteo values 
-      ppMet=pMet
-      pMet=cMet
-      cMet=float(MeteoValuesList[indexes[i]])
-      if(i<len(indexes)-2):
-         nMet=float(MeteoValuesList[indexes[i+1]])
-      else:
-         nMet=-1
-      if(i<len(indexes)-3):
-         nnMet=float(MeteoValuesList[indexes[i+2]])
-      else:
-         nnMet=-1
-      #print (round(ppMet),round(pMet),round(cMet),round(nMet),round(nnMet))
-      
-      
-      if(ListAveCoesClean[indexes[i]]>0):
+
+      if(ListAveCoesClean[indexes[i]]>0.0000000001):
          sumAve=sumAve+float(ListAveCoesClean[indexes[i]]) 
       else:
          pixs-=1     
-      #sumAve=sumAve+float(ListAveCoes[indexes[i]])
+
       i=i+1
       head, tail = os.path.split(csvFiles[indexes[i]])
-   if (pixs!=0):
+   #print (sumAve)
+   if (sumAve>0.0000001):
       sumAve=sumAve/float(pixs)
    else:
-      count=0.0
-      sumAve=0.0
-      if(ppAve!=-1):
-         count+=1.0
-         sumAve+=ppAve
-      if(pAve!=-1):
-         count+=1.0
-         sumAve+=pAve
-      if(cAve!=-1):
-         count+=1.0
-         sumAve+=cAve
-      if(nAve!=-1):
-         count+=1.0
-         sumAve+=nAve
-      if(nnAve!=-1):
-         count+=1.0
-         sumAve+=nAve
-      if count>0.00001:
-         sumAve=sumAve/count
-      else:
-         sumAve=-1
+      #count=0.0
+      #sumAve=0.0
+      #if(ppAve!=-1):
+      #   count+=1.0
+      #   sumAve+=ppAve
+      #if(pAve!=-1):
+      #   count+=1.0
+      #   sumAve+=pAve
+      #if(cAve!=-1):
+      #   count+=1.0
+      #   sumAve+=cAve
+      #if(nAve!=-1):
+      #   count+=1.0
+      #   sumAve+=nAve
+      #if(nnAve!=-1):
+      #   count+=1.0
+      #   sumAve+=nAve
+      #if count>0.00001:
+      #   sumAve=sumAve/count
+      #else:
+          sumAve=0.0
          
-         
+
    # else sumeAve=0   
    sumAves+=[sumAve]
+print (sumAves)
 
 if (len(sumAves)!=len(datesStr)):
    print ("ERROR: sumAves not equal to datesStr!!")
@@ -365,10 +363,8 @@ faves1.write("\n")
 
 faves1.write    ("%s"%zonesStr) # label of 2nd row
 
-print (sumAves)
 for i in range(len(datesStr)):
-      result=sumAves[i]
-      faves1.write(",%5f"% (result))
+      faves1.write(",%6f"% (sumAves[i]))
 faves1.write("\n")
 
 
