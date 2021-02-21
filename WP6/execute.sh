@@ -29,14 +29,21 @@ python  CsvCreation/mainNoNan.py -in "/run/media/milto/Seagate Expansion Drive/A
 
 python  CsvCreation/mainNoNan.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/ERS-1/" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ERS-1" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
 
-# Sentinel ASCENDING
+# Sentinel ASCENDING (all since they have been copied)
 python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/Sentinel-1/ASCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
 
-# Sentinel DESCENDING
-python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/Sentinel-1/DESCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
 
-# Sentinel ENVISAT 
-python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level2/Sentinel-1/DESCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING" -masks "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
+# Sentinel ENVISAT from SSD  
+python  CsvCreation/main.py -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level2/ENVISAT" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ENVISAT" -masks "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
+
+
+# Sentinel ASCENDING 2020 from SSD  
+python  CsvCreation/main.py -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level2/Sentinel-1/ASCENDING/2020/VH" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VH" -masks "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
+
+python  CsvCreation/main.py -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level2/Sentinel-1/ASCENDING/2020/VV" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/ASCENDING/VV" -masks "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/ASTARTE-masks/ascedingaspects_SW_W_NW_median_zones.tif"
+
+# Sentinel DESCENDING from SSD 
+python  CsvCreation/main.py -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level2/Sentinel-1/DESCENDING" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/Sentinel-1/DESCENDING" -masks "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
 
 
 

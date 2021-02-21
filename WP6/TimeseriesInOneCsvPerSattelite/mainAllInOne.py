@@ -65,13 +65,6 @@ parser.add_argument("-IDS",
      metavar='<string>')
      
      
-# exporting labels
-# *** START HARCODED CONSTANTS FOR SENTINEL !!!
-MMS = 9
-MME = 1
-YYYYS = 2014
-YYYYE = 2021 
-# *** END HARCODED CONSTANTS FOR SENTINEL !!!
 
 
 params       = vars(parser.parse_args())
@@ -124,6 +117,9 @@ for i in range(len(csvFiles)):
    
 dates.sort()
 
+
+
+
 indexes = list(range(0, len(dates)))
 
 for d in range(len(dates)):
@@ -131,8 +127,9 @@ for d in range(len(dates)):
       head, tail = os.path.split(csvFiles[i])
       if(dates[d]==tail[IDS:(IDS+8)]):
          indexes[d]=i
-         
-         
+
+
+        
 for i in indexes: 
    ead, tail = os.path.split(csvFiles[i])
 
@@ -147,6 +144,7 @@ zonesStr = zonesStr.replace(",", " ")
 outCsvDirPix  =outCsvDir+"_pix.csv"
 outCSvDirNoAve=outCsvDir+"_noAve.csv"
 oitCSvDirMeto =outCsvDir+"_Meto.csv"
+outCsvDirNotCleaned=outCsvDir+"_notCleaned.csv"
 
 # opening/creating files
 favesPix  = open(outCsvDirPix  ,"w+")
@@ -211,6 +209,8 @@ favesNoAve.write("%s\n"%tail[IDS:(IDS+8)])
 favesNoAve.write("%s,"%zonesStr)
 fmeteoOut.write("%s\n"%tail[IDS:(IDS+8)]) 
 fmeteoOut.write("%s,"%zonesStr)
+
+
 
 value=0.0
 while (1 and date[8:10]): # day, month, year
@@ -284,97 +284,34 @@ for i in range(len(ListAveCoes)):
    if (MeteoValuesList[i]<MeteoThres):
       ListAveCoesClean+=[ListAveCoes[i]]
    else:
-      ListAveCoesClean+=[-1]
+      ListAveCoesClean+=[-1000]
       
-#print (ListAveCoesClean)
-
+print ("ListAveCoesClean",ListAveCoesClean)
+print ("ListAveCoes",ListAveCoes)
+print ("MeteoValuesList",MeteoValuesList)
 
 i=0
-nnAve=-1000
-nAve =-1000
-cAve =-1000
-pAve =-1000
-ppAve=-1000
-nnMet=-1000
-nMet =-1000
-cMet =-1000
-pMet =-1000
-ppMet=-1000
 
 sumAves=[]
 for d in range(len(datesStr)):
    currentMonth=datesStr[d]
    sumAve=0
    pixs=0 
-   nO=0
    head, tail = os.path.split(csvFiles[indexes[i]])
    #print (currentMonth[4:6],tail[21:23])
-
-   while (i<len(indexes)-1 and currentMonth[4:6]==tail[21:23]):
+   while (i<len(indexes)-1 and currentMonth[4:6]==tail[(IDS+4):(IDS+6)] and currentMonth[2:4]==tail[(IDS+2):(IDS+4)]): 
       pixs=pixs+1
-      
-      # Loading 5 back aveverage coes to enable interpolation
-      ppAve=pAve
-      pAve=cAve
-      cAve=float(ListAveCoes[indexes[i]])
-      if(i<len(indexes)-2):
-         nAve=float(ListAveCoes[indexes[i+1]])
-      else:
-         nAve=-1000
-      if(i<len(indexes)-3):
-         nnAve=float(ListAveCoes[indexes[i+2]])
-      else:
-         nnAve=-1000
-      #print (ppAve,pAve,cAve,nAve,nnAve)
-      
-      # Loading 5 meteo continues corresponding meteo values 
-      ppMet=pMet
-      pMet=cMet
-      cMet=float(MeteoValuesList[indexes[i]])
-      if(i<len(indexes)-2):
-         nMet=float(MeteoValuesList[indexes[i+1]])
-      else:
-         nMet=-1000
-      if(i<len(indexes)-3):
-         nnMet=float(MeteoValuesList[indexes[i+2]])
-      else:
-         nnMet=-1000
-      #print (round(ppMet),round(pMet),round(cMet),round(nMet),round(nnMet))
-      
-      
-      if(ListAveCoesClean[indexes[i]]>0):
+      if(ListAveCoesClean[indexes[i]]>-999):
          sumAve=sumAve+float(ListAveCoesClean[indexes[i]]) 
       else:
-         pixs-=1     
-      #sumAve=sumAve+float(ListAveCoes[indexes[i]])
+         pixs-=1
       i=i+1
       head, tail = os.path.split(csvFiles[indexes[i]])
+      
    if (pixs!=0):
       sumAve=sumAve/float(pixs)
    else:
-      count=0.0
-      sumAve=0.0
-      if(ppAve>-999):
-         count+=1.0
-         sumAve+=ppAve
-      if(pAve>-999):
-         count+=1.0
-         sumAve+=pAve
-      if(cAve>-999):
-         count+=1.0
-         sumAve+=cAve
-      if(nAve>-999):
-         count+=1.0
-         sumAve+=nAve
-      if(nnAve>-999):
-         count+=1.0
-         sumAve+=nAve
-      if count>0.00001:
-         sumAve=sumAve/count
-      else:
-         sumAve=-1000
-         
-         
+      sumAve=-1000         
    # else sumeAve=0   
    sumAves+=[sumAve]
 
@@ -385,26 +322,79 @@ if (len(sumAves)!=len(datesStr)):
 # export average back coe per month
 faves1    = open(outCsvDir     ,"w+")
 faves1.write    ("Filenames")  # label of 1st row
-
 for i in range(len(datesStr)):
    faves1.write(",%s"% datesStr[i])
 faves1.write("\n")
 
-faves1.write    ("%s"%zonesStr) # label of 2nd row
 
-print (sumAves)
+faves1.write    ("%s - cleaned by Meteo"%zonesStr) # label of 2nd row
 for i in range(len(datesStr)):
       result=sumAves[i]
-      faves1.write(",%5f"% (result))
+      if result > -999 :
+         faves1.write(",%5f"% (result))
+      else:
+         faves1.write(",")
 faves1.write("\n")
+faves1.close()
 
 
+i=0
+sumAves2=[]
+for d in range(len(datesStr)):
+   currentMonth=datesStr[d]
+   sumAve=0
+   pixs=0 
+   head, tail = os.path.split(csvFiles[indexes[i]])
 
 
+   while (i<len(indexes)-1 and currentMonth[4:6]==tail[(IDS+4):(IDS+6)] and currentMonth[2:4]==tail[(IDS+2):(IDS+4)]): 
+      pixs=pixs+1
+      if(ListAveCoes[indexes[i]]>0):
+         sumAve=sumAve+float(ListAveCoes[indexes[i]]) 
+      else:
+         pixs-=1     
+      #sumAve=sumAve+float(ListAveCoes[indexes[i]])
+      i=i+1
+      head, tail = os.path.split(csvFiles[indexes[i]])
+            
+   if (pixs!=0):
+      sumAve=sumAve/float(pixs)
+   else:
+      sumAve=-1000         
+   # else sumeAve=0   
+   sumAves2+=[sumAve]
 
 
+# export average back coe per month
+faves2    = open(outCsvDirNotCleaned,"w+")
+faves2.write    ("Filenames")  # label of 1st row
+for i in range(len(datesStr)):
+   faves2.write(",%s"% datesStr[i])
+faves2.write("\n")
 
- 
+
+faves2.write    ("%s - all data"%zonesStr) # label of 2nd row
+for i in range(len(datesStr)):
+      result=sumAves2[i]
+      if result > -999 :
+         faves2.write(",%5f"% (result))
+      else:
+         faves2.write(",")
+faves2.write("\n")
+faves2.close()
+
+for i in range(len(datesStr)):
+   if float(sumAves[i])<= (-999.0) :
+      sumAve=0.0
+   if float(sumAves2[i])<= (-999.0) :
+      sumAves2[i]=0.0
+
+print ("ListAveCoesClean",ListAveCoesClean)
+print ("ListAveCoes",ListAveCoes)
+print ("MeteoValuesList",MeteoValuesList)
+print ("sumAves2",sumAves2)
+print ("sumAves",sumAves)
+
 print ("   ***   EXIT   ***\n")
 
 
