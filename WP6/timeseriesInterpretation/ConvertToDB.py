@@ -46,7 +46,10 @@ finp = open(inpCsv,"r+")
 
 for line in finp:
    if count==0:
-      fout.write(line)
+      if(line[len(line)-1]=="\n"):
+         fout.write(line[0:len(line)-1])
+      else:
+         fout.write(line)
    else:
       my_list = line.split(",")
       count2=0
@@ -60,7 +63,7 @@ for line in finp:
                 result=float(item)
                 db=10*math.log10(abs(result))
                 fout.write(",")
-                fout.write(str(round(db,6)))
+                fout.write(str(db))
              else:   
                 fout.write(",")
              

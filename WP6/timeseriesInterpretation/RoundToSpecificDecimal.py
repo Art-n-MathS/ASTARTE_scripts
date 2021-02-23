@@ -52,7 +52,10 @@ finp = open(inpCsv,"r+")
 
 for line in finp:
    if count==0:
-      fout.write(line)
+      if(line[len(line)-1]=="\n"):
+         fout.write(line[0:len(line)-1])
+      else:
+         fout.write(line)
    else:
       my_list = line.split(",")
       count2=0

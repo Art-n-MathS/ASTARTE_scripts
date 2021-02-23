@@ -52,35 +52,44 @@ print ("filterIn     = ", filterList)
 
 fout = open(outCsv,"w+")
 finp = open(inpCsv,"r+")
-
-count =0
+clabels=[]
+items  =[]
+count=0
 for line in finp:
    if count==0:
+      if(line[len(line)-1]=="\n"):
+         fout.write(line[0:len(line)-1])
+      else:
+         fout.write(line)
       labels=line.split(",")
-      fout.write(line)
+      noItemsPerLine=len(labels)
    else:
       my_list = line.split(",")
       count2=0
-      iList=[]
       for item in my_list:
-        
          if count2==0:
-             if count!=0:
-                fout.write("\n")
-                fout.write(item)
+             clabels+=[item]
          else:
              if check_float(item):
                 result=float(item)
-                iList+=[result]
+                items+=[result]
              else:   
-                fout.write(",")
-         if count2%len(labels)==0:
-             for iL in iList:
-                fout.write(",")
-                fout.write(str(iL))
-                iList=[]     
+                items+=[None]
+             
          count2+=1
    count+=1
+
+itemsIndex=0
+for l in clabels: 
+   fout.write("\n")
+   fout.write(l)
+   for i in range(noItemsPerLine-1): 
+      if (itemsIndex<len(items) and items[itemsIndex]!=None and check_float(items[itemsIndex])):
+         fout.write(",")
+         fout.write(str(items[itemsIndex]))
+      else:
+         fout.write(",")       
+      itemsIndex+=1
 
 
 finp.close()
