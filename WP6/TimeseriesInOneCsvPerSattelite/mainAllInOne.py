@@ -357,7 +357,7 @@ for d in range(len(datesStr)):
       i=i+1
       head, tail = os.path.split(csvFiles[indexes[i]])
             
-   if (pixs!=0):
+   if (pixs>0):
       sumAve=sumAve/float(pixs)
    else:
       sumAve=-1000         
