@@ -117,11 +117,31 @@ for l in range(len(clabels)):
    eitemsIndex=sitemsIndex+itemsPerLine-filterLen+1
    
    print ("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-   print (sitemsIndex,eitemsIndex, itemsPerLine, math.ceil(filterLen/2.0), filterLen)
    
+   
+   sfilter=0
+   efilter=len(filterList)
+   metatopisi=math.ceil(efilter/2.0)
+   print (sitemsIndex,eitemsIndex, itemsPerLine, math.ceil(filterLen/2.0), filterLen, metatopisi)
    while sitemsIndex<eitemsIndex:
-      fout.write(",")
-      fout.write("Hello")
+      sfilter=0
+      sumN=0.0
+      sumP=0.0
+      while sfilter<efilter:
+         print (sitemsIndex, sfilter, metatopisi,sitemsIndex+sfilter-metatopisi,len(items))
+         print (items[sitemsIndex+sfilter-metatopisi])
+         if(items[sitemsIndex+sfilter-metatopisi]!=None and check_float(items[sitemsIndex+sfilter-metatopisi])):
+            sumN+=items[sitemsIndex+sfilter-metatopisi]*filterList[sfilter]
+            sumP+=filterList[sfilter]
+         sfilter+=1
+      if sumP>0:
+         sumN=sumN/sumP
+         fout.write(",")
+         fout.write(str(sumN))
+         sumN=0.0
+         sumP=0.0
+      else:
+         fout.write(",")
       sitemsIndex+=1
       
          
