@@ -112,39 +112,65 @@ for l in range(len(clabels)):
       else:
          fout.write(",")
       filterIndex+=1   
-      
-      
+   
+     
    # middle complete filter
    sitemsIndex=itemsIndex-midFilter #because previous method was counting from middle of filter
    eitemsIndex=sitemsIndex+itemsPerLine-filterLen+1
-   print ("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",sitemsIndex,eitemsIndex)
    sfilter=0
    efilter=len(filterList)
    metatopisi=math.ceil(efilter/2.0)
-   print (sitemsIndex,eitemsIndex, itemsPerLine, math.ceil(filterLen/2.0), filterLen, metatopisi)
+
    while sitemsIndex<eitemsIndex:
       sfilter=0
       sumN=0.0
       sumP=0.0
       while sfilter<efilter:
-         #print (sitemsIndex, sfilter, metatopisi,sitemsIndex+sfilter-metatopisi,len(items))
-         #print (items[sitemsIndex+sfilter-metatopisi])
          if(items[sitemsIndex+sfilter-metatopisi]!=None and check_float(items[sitemsIndex+sfilter-metatopisi])):
             sumN+=items[sitemsIndex+sfilter-metatopisi]*filterList[sfilter]
-            print (sitemsIndex+sfilter-metatopisi, "/", itemsPerLine,items[sitemsIndex+sfilter-metatopisi],filterList[sfilter])
             sumP+=filterList[sfilter]
          sfilter+=1
       if sumP>0:
          sumN=sumN/sumP
          fout.write(",")
          fout.write(str(sumN))
-         print (sumN)
          sumN=0.0
          sumP=0.0
       else:
          fout.write(",")
       sitemsIndex+=1
-      print ("\n\n")
+      
+   # end complete filter
+
+   eitemsIndex=sitemsIndex+math.ceil(filterLen/2.0)-1
+   sfilter=0
+   efilter=len(filterList)
+   metatopisi=math.ceil(efilter/2.0)
+   ofilter=1
+   while sitemsIndex<eitemsIndex:
+
+      sfilter=0
+      sumN=0.0
+      sumP=0.0
+      while sfilter<efilter-ofilter:
+         if(items[sitemsIndex+sfilter-metatopisi]!=None and check_float(items[sitemsIndex+sfilter-metatopisi])):
+            sumN+=items[sitemsIndex+sfilter-metatopisi]*filterList[sfilter]
+            sumP+=filterList[sfilter]
+
+         sfilter+=1
+      if sumP>0:
+         sumN=sumN/sumP
+         fout.write(",")
+         fout.write(str(sumN))
+
+         sumN=0.0
+         sumP=0.0
+      else:
+         fout.write(",")
+      sitemsIndex+=1
+      ofilter+=1
+
+   
    
       
          
