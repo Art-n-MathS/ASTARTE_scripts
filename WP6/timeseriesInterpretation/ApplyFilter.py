@@ -44,6 +44,7 @@ inpCsv    = params["in"     ]
 outCsv    = params["out"    ]
 filterIn  = params["filter" ]
 filterList= filterIn.split(',')
+filterList=list(map(float, filterList))
 
 print ("inImgDir     = ", inpCsv    ) 
 print ("outImgDir    = ", outCsv    )
@@ -57,7 +58,7 @@ items  =[]
 count=0
 for line in finp:
    if count==0:
-      if(line[len(line)-1]=="\n"):
+      if(line[len(line)-1]=="\n"): 
          fout.write(line[0:len(line)-1])
       else:
          fout.write(line)
@@ -80,16 +81,68 @@ for line in finp:
    count+=1
 
 itemsIndex=0
-for l in clabels: 
+itemsPerLine=noItemsPerLine-1 # removing count for label
+filterLen=len(filterList)
+midFilter=math.floor(float(filterLen)/2.0) # e.g. 0 1 (2) 3 4 
+print (itemsPerLine, filterLen, midFilter)
+
+
+for l in range(len(clabels)): 
    fout.write("\n")
-   fout.write(l)
-   for i in range(noItemsPerLine-1): 
-      if (itemsIndex<len(items) and items[itemsIndex]!=None and check_float(items[itemsIndex])):
+   fout.write(clabels[l])
+   filterSum=0
+   Sum=0
+   itemsIndex=midFilter+l*itemsPerLine
+   filterIndex=midFilter
+   
+   # left half filter
+
+   while filterIndex<filterLen-1: 
+      cfilterIndex=filterIndex
+      eitemsIndex=filterLen+l*itemsPerLine
+      while itemsIndex<eitemsIndex:
+         if(items[itemsIndex]!=None and check_float(items[itemsIndex])):
+            filterSum+=(filterList[cfilterIndex])
+            Sum+=items[itemsIndex]*(filterList[cfilterIndex])
+         itemsIndex+=1
+         cfilterIndex+=1
+      if filterSum>0.0001:
          fout.write(",")
-         fout.write(str(items[itemsIndex]))
+         fout.write(str(Sum/filterSum))
       else:
-         fout.write(",")       
-      itemsIndex+=1
+         fout.write(",")
+      filterIndex+=1   
+   # middle complete filter
+   sitemsIndex=itemsIndex
+   eitemsIndex=sitemsIndex+itemsPerLine-filterLen+1
+   
+   print ("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+   print (sitemsIndex,eitemsIndex, itemsPerLine, math.ceil(filterLen/2.0), filterLen)
+   
+   while sitemsIndex<eitemsIndex:
+      fout.write(",")
+      fout.write("Hello")
+      sitemsIndex+=1
+      
+         
+      
+      
+      
+   #for i in range(itemsPerLine):
+   #   itemsIndex=0
+   #   while  itemsIndex<itemsPerLine and itemsIndex<filterLen:
+   #      if (itemsIndex+itemsIndex<len(items) and items[itemsIndex+itemsIndex]!=None 
+   #          and check_float(items[itemsIndex+itemsIndex])):
+   #         Sum+=items[itemsIndex+itemsIndex]
+   #         filterSum+=float(filterList[itemsIndex])
+   #      itemsIndex+=1
+         
+   #   if (filterSum>0.000001):
+   #      fout.write(",")
+   #      fout.write(str(Sum/filterSum))
+   #   else:
+   #      fout.write(",")       
+   #   itemsIndex+=1
 
 
 finp.close()
