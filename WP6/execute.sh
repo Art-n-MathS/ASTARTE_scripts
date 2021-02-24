@@ -34,7 +34,7 @@ python  CsvCreation/main.py -in "/run/media/milto/Seagate Expansion Drive/ASTART
 
 
 # Sentinel ENVISAT from SSD  
-python  CsvCreation/main.py -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level2/ENVISAT" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ENVISAT" -masks "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
+python  CsvCreation/main.py -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level2/ENVISAT" -o "/run/media/milto/Seagate Expansion Drive/ASTARTE_data/Level3/ENVISAT/reprocessed" -masks "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/ASTARTE-masks/AOI_masks_based_on_elevation_and_aspect_combined_with_NE_E_SE.tif"
 
 
 # Sentinel ASCENDING 2020 from SSD  

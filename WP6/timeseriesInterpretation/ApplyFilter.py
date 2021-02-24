@@ -1,11 +1,13 @@
 ## package Apply Filter
 #  @brief A script that takes as input a csv file, whose first column and first row are labels and applies an input filter 
 # 
-# how to run: python ConvertToDB.py -in <input.csv> -out <output.csv> -filter <f1,f2,f3,f4,f5>
-# where the numbers of numbers followed after the tag "-filter should be odd and defines the filter to be applied. No spaces between commas. 
+# @brief how to run: python ConvertToDB.py -in <input.csv> -out <output.csv> -filter <f1,f2,f3,f4,f5>
+# @brief where the numbers of numbers followed after the tag "-filter should be odd and defines the filter to be applied. No spaces between commas. 
 # 
-# example: python "/home/milto/Documents/ASTARTE/Scripts/WP6/timeseriesInterpretation/ApplyFilter.py" -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/heights/Sentinel1_Asc_VH_all_heigh_DB.csv" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/heights/Sentinel1_Asc_VH_all_heigh_DB_filtered.csv" -filter 1,2,5,2,1 
+# @brief example: python "/home/milto/Documents/ASTARTE/Scripts/WP6/timeseriesInterpretation/ApplyFilter.py" -in "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/heights/Sentinel1_Asc_VH_all_heigh_DB.csv" -out "/home/milto/Documents/ASTARTE/ASTARTE_sample_data/level4/Sentinel-1/ASCENDING/VH/heights/Sentinel1_Asc_VH_all_heigh_DB_filtered.csv" -filter 1,2,5,2,1 
 # 
+#
+#
 #  @author Dr. Milto Miltiadou
 #  @date 23th of Feb 2021
 #  @version 1.0
@@ -86,7 +88,7 @@ filterLen=len(filterList)
 midFilter=math.floor(float(filterLen)/2.0) # e.g. 0 1 (2) 3 4 
 print (itemsPerLine, filterLen, midFilter)
 
-
+sitemsIndex=0
 for l in range(len(clabels)): 
    fout.write("\n")
    fout.write(clabels[l])
@@ -96,26 +98,61 @@ for l in range(len(clabels)):
    filterIndex=midFilter
    
    # left half filter
+   
+  # while filterIndex<filterLen-1: 
+  #    cfilterIndex=filterIndex
+  #    eitemsIndex=filterLen+l*itemsPerLine
+  #    while itemsIndex<eitemsIndex:
+  #       if(items[itemsIndex]!=None and check_float(items[itemsIndex])):
+  #          filterSum+=(filterList[cfilterIndex])
+  #          Sum+=items[itemsIndex]*(filterList[cfilterIndex])
+            
+  #       itemsIndex+=1
+ #        cfilterIndex+=1
+ #     if filterSum>0.0001:
+  #       fout.write(",")
+  #       fout.write(str(Sum/filterSum))
+   ##   else:
+    #     fout.write(",")
+    #  filterIndex+=1   
+   
+   
+   # end complete filter
 
-   while filterIndex<filterLen-1: 
-      cfilterIndex=filterIndex
-      eitemsIndex=filterLen+l*itemsPerLine
-      while itemsIndex<eitemsIndex:
-         if(items[itemsIndex]!=None and check_float(items[itemsIndex])):
-            filterSum+=(filterList[cfilterIndex])
-            Sum+=items[itemsIndex]*(filterList[cfilterIndex])
-         itemsIndex+=1
-         cfilterIndex+=1
-      if filterSum>0.0001:
+   eitemsIndex=math.ceil(filterLen/2.0)-1+l*itemsPerLine
+   sfilter=math.ceil(filterLen/2.0)
+   efilter=len(filterList)
+   metatopisi=math.ceil(efilter/2.0)
+
+   while sitemsIndex<eitemsIndex:
+      sfilter=math.ceil(filterLen/2.0)
+      sumN=0.0
+      sumP=0.0
+      while sfilter<efilter:
+         if(items[sitemsIndex+sfilter-metatopisi]!=None and check_float(items[sitemsIndex+sfilter-metatopisi])):
+            sumN+=items[sitemsIndex+sfilter-metatopisi]*filterList[sfilter]
+            sumP+=filterList[sfilter]
+
+         sfilter+=1
+      if sumP>0:
+         sumN=sumN/sumP
          fout.write(",")
-         fout.write(str(Sum/filterSum))
+         fout.write(str(sumN))
+
+         sumN=0.0
+         sumP=0.0
       else:
          fout.write(",")
-      filterIndex+=1   
+      sitemsIndex+=1
+
+      
+      
+      
+      
    
      
    # middle complete filter
-   sitemsIndex=itemsIndex-midFilter #because previous method was counting from middle of filter
+   sitemsIndex=midFilter+l*itemsPerLine #because previous method was counting from middle of filter
    eitemsIndex=sitemsIndex+itemsPerLine-filterLen+1
    sfilter=0
    efilter=len(filterList)
@@ -173,25 +210,7 @@ for l in range(len(clabels)):
    
    
       
-         
-      
-      
-      
-   #for i in range(itemsPerLine):
-   #   itemsIndex=0
-   #   while  itemsIndex<itemsPerLine and itemsIndex<filterLen:
-   #      if (itemsIndex+itemsIndex<len(items) and items[itemsIndex+itemsIndex]!=None 
-   #          and check_float(items[itemsIndex+itemsIndex])):
-   #         Sum+=items[itemsIndex+itemsIndex]
-   #         filterSum+=float(filterList[itemsIndex])
-   #      itemsIndex+=1
-         
-   #   if (filterSum>0.000001):
-   #      fout.write(",")
-   #      fout.write(str(Sum/filterSum))
-   #   else:
-   #      fout.write(",")       
-   #   itemsIndex+=1
+     
 
 
 finp.close()
