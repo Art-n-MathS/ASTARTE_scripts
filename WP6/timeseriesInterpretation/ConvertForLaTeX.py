@@ -45,7 +45,7 @@ count =0
 fout = open(outTxt,"w+")
 finp = open(inpCsv,"r+")
 
-fout.write("\\hline")
+fout.write("        \\hline\n        ")
 
 for line in finp:
 
@@ -57,7 +57,7 @@ for line in finp:
             fout.write(" & ")
          else:
             fout.write(" \\\\")
-      fout.write("\n\\hline\n")
+      fout.write("\n        \\hline\n        ")
 
 finp.close()
 fout.close()
