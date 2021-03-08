@@ -45,7 +45,7 @@ count =0
 fout = open(outTxt,"w+")
 finp = open(inpCsv,"r+")
 
-fout.write("        \\hline\n        ")
+fout.write("\\hline\n")
 
 for line in finp:
 
@@ -56,8 +56,10 @@ for line in finp:
          if (i<len(my_list)-1):
             fout.write(" & ")
          else:
-            fout.write(" \\\\")
-      fout.write("\n        \\hline\n        ")
+            if (i<len(my_list)-1):
+               fout.write(" \\\\")
+            else:
+               fout.write("\\\\ \\hline\n")
 
 finp.close()
 fout.close()
