@@ -61,26 +61,51 @@ count =0
 fout = open(outCsv,"w+")
 finp = open(inpCsv,"r+")
 
+columnLabels=[]
+metrics=[]
+metrics+=[[]] #0 SUM
+metrics+=[[]] #1 peakAmplitude
+metrics+=[[]] #2 PulseWidth
+metrics+=[[]] #3 Start
+metrics+=[[]] #4 End
+print ("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+print (metrics)
+print ("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 for line in finp:
    if count==0:
       my_list = line.split(",")
       fout.write("%s,Sum, peakAmplitude, PulseWidth, Start, End" % my_list[0])
    else:
       my_list = line.split(",")
-      fout.write("\n%s"%my_list[0])
-      for m in range(4):
-         if m==0: #Sum
-            print ("Sum")
-            sumV=0.0
-            for item in my_list:
-               if check_float(item):
-                  result=float(item)
-                  sumV+=result 
-            fout.write(",%f"%sumV)     
-         if m==1: # peakAmplitude
-            print ("peakAmplitude")
+      if len(my_list)<0:
+         sys.exit("ERROR: File empty / No Columns")
+      columnLabels+=[my_list[0]]
+      
+      # Getting SUM
+      sumV=0.0
+      for item in my_list:
+        if check_float(item):
+           result=float(item)
+           sumV+=result 
+      metrics[0]+=[sumV] #0 SUM
+        
+      metrics[1]+=[sumV+1] #1 peakAmplitude
+      
+      metrics[2]+=[2] #2 PulseWidth
+      
+      metrics[3]+=[3] #3 Start
+      
+      metrics[4]+=[4] #4 End
+      
    count+=1
 
+
+print ("-----", columnLabels)
+print (metrics, count, range(count-1))
+for c in range(count-1): # -1 because of the labels
+   fout.write("\n%s"%columnLabels[c])
+   for i in range (0,5):
+      fout.write(",%s"%metrics[i][c])
 
 finp.close()
 fout.close()
