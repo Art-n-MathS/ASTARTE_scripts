@@ -61,9 +61,10 @@ for line in finp:
          else:
              if check_float(item):
                 result=float(item)
-                db=10*math.log10(abs(result))
                 fout.write(",")
-                fout.write(str(db))
+                if (result>0.000001):
+                   db=10*math.log10(abs(result))
+                   fout.write(str(db))
              else:   
                 fout.write(",")
              

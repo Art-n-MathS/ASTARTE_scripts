@@ -15,6 +15,9 @@ import argparse
 import sys
 import os
 import math
+import numpy as np
+from scipy.signal import chirp, find_peaks, peak_widths
+import matplotlib.pyplot as plt
 
 def check_float(potential_float):
     try:
@@ -61,20 +64,23 @@ count =0
 fout = open(outCsv,"w+")
 finp = open(inpCsv,"r+")
 
+noOfLabels=6
 columnLabels=[]
 metrics=[]
 metrics+=[[]] #0 SUM
-metrics+=[[]] #1 peakAmplitude
-metrics+=[[]] #2 PulseWidth
-metrics+=[[]] #3 Start
-metrics+=[[]] #4 End
+metrics+=[[]] #1 PeakAmplitude
+metrics+=[[]] #2 PeakTime
+metrics+=[[]] #3 PulseWidth
+metrics+=[[]] #4 MeanOfPulses
+metrics+=[[]] #5 StdOfPulses
 print ("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 print (metrics)
 print ("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+labels=[]
 for line in finp:
    if count==0:
-      my_list = line.split(",")
-      fout.write("%s,Sum, peakAmplitude, PulseWidth, Start, End" % my_list[0])
+      labels = line.split(",")
+      fout.write("%s,Sum, PeakAmplitude, PeakTime, PulseWidth, MeanOfPulses, StdOfPulses" % labels[0])
    else:
       my_list = line.split(",")
       if len(my_list)<0:
@@ -83,29 +89,41 @@ for line in finp:
       
       # Getting SUM
       sumV=0.0
+      fitems=[]
       for item in my_list:
         if check_float(item):
            result=float(item)
            sumV+=result 
+           fitems+=[result] # save all items as floats into an array
       metrics[0]+=[sumV] #0 SUM
-        
-      metrics[1]+=[sumV+1] #1 peakAmplitude
       
-      metrics[2]+=[2] #2 PulseWidth
       
-      metrics[3]+=[3] #3 Start
+      # get information about peaks
+      peaks, _ = find_peaks(fitems)
+      print (peaks,peaks[0], "===========================")
+      metrics[1]+=[fitems[int(peaks[0])]] #2 PeakAmplitude
+      widths=peak_widths(fitems, peaks, rel_height=1)
+      plabels=[]
+      for p in range(len(peaks)):
+         plabels+=[labels[peaks[p]+1]] #+1 since labels inclue the first column within the labels list
+      metrics[2]+=[np.array(plabels)] #3 PeakTime
+            
+      metrics[3]+=[widths[0]] #3 PulseWidth
       
-      metrics[4]+=[4] #4 End
+      metrics[4]+=[widths[1]] #4 MeanOfPulses
+      
+      metrics[5]+=[widths[2]] #5 StdOfPulses
       
    count+=1
 
 
-print ("-----", columnLabels)
-print (metrics, count, range(count-1))
+#print ("-----", columnLabels)
+#print (metrics, count, range(count-1))
 for c in range(count-1): # -1 because of the labels
    fout.write("\n%s"%columnLabels[c])
-   for i in range (0,5):
-      fout.write(",%s"%metrics[i][c])
+   for i in range (0,4):
+      #print (i, c, metrics [i][c])
+      fout.write(",%s"%metrics[i][c]) 
 
 finp.close()
 fout.close()
