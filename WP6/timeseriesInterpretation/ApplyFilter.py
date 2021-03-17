@@ -106,11 +106,10 @@ for l in range(len(clabels)):
 
 
    while sitemsIndex<eitemsIndex:
-      sfilter=math.ceil(filterLen/2.0)
+      sfilter=midFilter
       sumN=0.0
       sumP=0.0
       while sfilter<efilter:
-         print ( " sfilter=",sfilter," efilter=",efilter, " sitemsIndex=",sitemsIndex," eitemsIndex=",eitemsIndex )
          if(items[sitemsIndex+sfilter-midFilter]!=None and check_float(items[sitemsIndex+sfilter-midFilter])):
             sumN+=items[sitemsIndex+sfilter-midFilter]*filterList[sfilter]
             sumP+=filterList[sfilter]
