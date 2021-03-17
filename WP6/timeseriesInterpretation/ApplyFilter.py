@@ -99,38 +99,20 @@ for l in range(len(clabels)):
    
    # left half filter
    
-  # while filterIndex<filterLen-1: 
-  #    cfilterIndex=filterIndex
-  #    eitemsIndex=filterLen+l*itemsPerLine
-  #    while itemsIndex<eitemsIndex:
-  #       if(items[itemsIndex]!=None and check_float(items[itemsIndex])):
-  #          filterSum+=(filterList[cfilterIndex])
-  #          Sum+=items[itemsIndex]*(filterList[cfilterIndex])
-            
-  #       itemsIndex+=1
- #        cfilterIndex+=1
- #     if filterSum>0.0001:
-  #       fout.write(",")
-  #       fout.write(str(Sum/filterSum))
-   ##   else:
-    #     fout.write(",")
-    #  filterIndex+=1   
-   
-   
-   # end complete filter
-
+  
    eitemsIndex=math.ceil(filterLen/2.0)-1+l*itemsPerLine
    sfilter=math.ceil(filterLen/2.0)
    efilter=len(filterList)
-   metatopisi=math.ceil(efilter/2.0)
+
 
    while sitemsIndex<eitemsIndex:
       sfilter=math.ceil(filterLen/2.0)
       sumN=0.0
       sumP=0.0
       while sfilter<efilter:
-         if(items[sitemsIndex+sfilter-metatopisi]!=None and check_float(items[sitemsIndex+sfilter-metatopisi])):
-            sumN+=items[sitemsIndex+sfilter-metatopisi]*filterList[sfilter]
+         print ( " sfilter=",sfilter," efilter=",efilter, " sitemsIndex=",sitemsIndex," eitemsIndex=",eitemsIndex )
+         if(items[sitemsIndex+sfilter-midFilter]!=None and check_float(items[sitemsIndex+sfilter-midFilter])):
+            sumN+=items[sitemsIndex+sfilter-midFilter]*filterList[sfilter]
             sumP+=filterList[sfilter]
 
          sfilter+=1
@@ -152,19 +134,19 @@ for l in range(len(clabels)):
    
      
    # middle complete filter
-   sitemsIndex=midFilter+l*itemsPerLine #because previous method was counting from middle of filter
+   sitemsIndex=midFilter+l*itemsPerLine 
    eitemsIndex=sitemsIndex+itemsPerLine-filterLen+1
    sfilter=0
    efilter=len(filterList)
-   metatopisi=math.ceil(efilter/2.0)
+
 
    while sitemsIndex<eitemsIndex:
       sfilter=0
       sumN=0.0
       sumP=0.0
       while sfilter<efilter:
-         if(items[sitemsIndex+sfilter-metatopisi]!=None and check_float(items[sitemsIndex+sfilter-metatopisi])):
-            sumN+=items[sitemsIndex+sfilter-metatopisi]*filterList[sfilter]
+         if(items[sitemsIndex+sfilter-midFilter]!=None and check_float(items[sitemsIndex+sfilter-midFilter])):
+            sumN+=items[sitemsIndex+sfilter-midFilter]*filterList[sfilter]
             sumP+=filterList[sfilter]
          sfilter+=1
       if sumP>0:
@@ -182,7 +164,7 @@ for l in range(len(clabels)):
    eitemsIndex=sitemsIndex+math.ceil(filterLen/2.0)-1
    sfilter=0
    efilter=len(filterList)
-   metatopisi=math.ceil(efilter/2.0)
+
    ofilter=1
    while sitemsIndex<eitemsIndex:
 
@@ -190,8 +172,8 @@ for l in range(len(clabels)):
       sumN=0.0
       sumP=0.0
       while sfilter<efilter-ofilter:
-         if(items[sitemsIndex+sfilter-metatopisi]!=None and check_float(items[sitemsIndex+sfilter-metatopisi])):
-            sumN+=items[sitemsIndex+sfilter-metatopisi]*filterList[sfilter]
+         if(items[sitemsIndex+sfilter-midFilter]!=None and check_float(items[sitemsIndex+sfilter-midFilter])):
+            sumN+=items[sitemsIndex+sfilter-midFilter]*filterList[sfilter]
             sumP+=filterList[sfilter]
 
          sfilter+=1
@@ -218,5 +200,3 @@ fout.close()
 
 
 print ("   ***   EXIT   ***\n")
-
-

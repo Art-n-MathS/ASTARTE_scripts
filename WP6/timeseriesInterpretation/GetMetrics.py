@@ -128,7 +128,9 @@ for c in range(count-1): # -1 because of the labels
 finp.close()
 fout.close()
 
-
+plt.plot(fitems)
+#plt.plot(peaks,fitems[peaks[0]],"x")
+plt.show()
 print ("   ***   EXIT   ***\n")
 
 
