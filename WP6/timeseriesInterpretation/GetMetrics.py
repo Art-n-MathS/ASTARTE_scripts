@@ -72,21 +72,23 @@ count =0
 fout = open(outCsv,"w+")
 finp = open(inpCsv,"r+")
 
-noOfLabels=6
+noOfLabels=5
 columnLabels=[]
 metrics=[]
 metrics+=[[]] #0 Mean
 metrics+=[[]] #1 PeakAmplitude
 metrics+=[[]] #2 PeakTime
 metrics+=[[]] #3 PulseWidth
-metrics+=[[]] #4 MeanOfPulses
-metrics+=[[]] #5 StdOfPulses
+metrics+=[[]] #4 No of peaks
+
+#metrics+=[[]] #5 MeanOfPulses
+#metrics+=[[]] #6 StdOfPulses
 
 labels=[]
 for line in finp:
    if count==0:
       labels = line.split(",")
-      fout.write("%s,Mean, PeakAmplitude, PeakTime, PulseWidth" % labels[0])
+      fout.write("%s,Mean, PeakAmplitude, PeakTime, PulseWidth, NoOfPeaks" % labels[0])
    else:
       my_list = line.split(",")
       if len(my_list)<0:
@@ -118,26 +120,17 @@ for line in finp:
       widths1=list(widths[1])
       widths2=list(widths[2])
       poppinItems=[]
-      for p in range(len(peaks)):
-         print ("+++++++++++++++++++++++++++++")
-         print (len(widths))
-         print (minWidth)
-         print (widths[0][p]) 
-         print (p, len(peaks), len(peaks1), peaks, peaks1)
-         print ("+++++++++++++++++++++++++++++")
-         if widths[0][p] < minWidth : 
-            poppinItems+=[p]
-           
-      p=len(poppinItems)-1
-      while(p>=0):
-         widths0.pop(p)
-         widths1.pop(p)
-         widths2.pop(p)
-         peaks1.pop(p)
-         p-=1
-           
+      maxWidth=widths0[0]
+      mWIndex=0
 
-      metrics[1]+=[fitems[int(peaks1[0])]] #1 PeakAmplitude
+      for p in range(len(widths0)):
+         if maxWidth<widths0[p]:
+            maxWidth=widths0[p]
+            mWIndex=p
+
+             
+
+      metrics[1]+=[fitems[int(peaks1[mWIndex])]] #1 PeakAmplitude
 
 
       if (len(peaks1)!=len(widths1) and len(peaks1)!=1):
@@ -145,17 +138,20 @@ for line in finp:
          
       plabels=[]
       for p in range(len(peaks1)):
-         plabels+=[labels[peaks1[p]+1]] #+1 since labels inclue the first column within the labels list
+         plabels+=[labels[peaks1[mWIndex]+1]] #+1 since labels inclue the first column within the labels list
       
       month=int(plabels[0][4:6])   
 
       metrics[2]+=[month]        #2 PeakTime
             
-      metrics[3]+=[widths0[0]] #3 PulseWidth
+      metrics[3]+=[maxWidth]     #3 PulseWidth
       
-      metrics[4]+=[widths1[0]] #4 MeanOfPulses
+      metrics[4]+=[len(widths0)] #4 MeanOfPulses
+            
+            
+      #metrics[5]+=[widths1[mWIndex]] #5 MeanOfPulses
       
-      metrics[5]+=[widths2[0]] #5 StdOfPulses
+      #metrics[6]+=[widths2[mWIndex]] #6 StdOfPulses
       
    count+=1
 
@@ -164,7 +160,7 @@ for line in finp:
 #print (metrics, count, range(count-1))
 for c in range(count-1): # -1 because of the labels
    fout.write("\n%s"%columnLabels[c])
-   for i in range (0,4):
+   for i in range (0,noOfLabels):
       #print (i, c, metrics [i][c])
       fout.write(",%s"%metrics[i][c]) 
 
