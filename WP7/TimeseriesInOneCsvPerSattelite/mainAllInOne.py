@@ -187,7 +187,7 @@ for i in range(len(indexes)-1):
       #print ("-------------------")
       meteoLine=fMeteoData.readline()
       if (meteoLine==""):
-         value=0.0
+         value=float(value)
          break
       meteoLine=meteoLine[0:len(meteoLine)-2]
       meteoData=str(meteoData)
@@ -202,13 +202,7 @@ for i in range(len(indexes)-1):
 
    MeteoValuesList+=[value]
 
-if len(indexes)==0:
-   print ("ERROR: No files found")
-   exit(1)
-
-
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
-
 favesPix.write  ("%s\n"%tail[IDS:(IDS+8)]) 
 favesPix.write  ("%s,"%zonesStr)  # zonesStr is the label of the 2nd column
 favesNoAve.write("%s\n"%tail[IDS:(IDS+8)]) 
@@ -230,7 +224,7 @@ while (1 and date[8:10]): # day, month, year
    meteoData=str(meteoData)
    meteoData=meteoLine.split(",")
    if (meteoLine==""):
-      value=0.0
+      value=float(value)
       break
    [date,value]=meteoData
    if(value==''):
@@ -290,7 +284,7 @@ for i in range(len(ListAveCoes)):
    if (MeteoValuesList[i]<MeteoThres):
       ListAveCoesClean+=[ListAveCoes[i]]
    else:
-      ListAveCoesClean+=[-1000]
+      ListAveCoesClean+=[ListAveCoes[i]]
       
 print ("ListAveCoesClean",ListAveCoesClean)
 print ("ListAveCoes",ListAveCoes)
@@ -402,8 +396,4 @@ print ("sumAves2",sumAves2)
 print ("sumAves",sumAves)
 
 print ("   ***   EXIT   ***\n")
-
-
-
-
 

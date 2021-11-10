@@ -4,12 +4,7 @@ Af<-c(-11.6496397270891,-11.388527341566,-11.1626211611812,-10.7709142055273,-10
 # c-band data for entire study area filtered
 A<-c(-11.8839818665544,-11.3558385707335,-11.254312161456,-10.7165536473514,-10.3968146627144,-10.2935563631455,-9.98707726975831,-10.3216664382143,-10.4783742578554,-10.5762481315342,-10.8499611784531,-11.3270343505167,-11.3604103732633,-13.1611581503915,-10.7665752480822,-11.5737204120313,-11.2215084754322,-10.3722828774767,-10.1903814618587,-10.4731408594664,-10.8416239713654,-10.8476378161834,-11.173218070413,-10.4472606056287,-10.9463593123311,-11.7186234393964,-11.34221112523,-11.262145391818,-10.9028354676566,-10.5160659747652,-10.1446575162199,-10.5363126118815,-10.6250718344569,-10.9027820031965,-11.0041475854632,-10.7017251876931,-10.4150300996847,-11.1613423904543,-10.8621792642395,-11.0216955258252,-10.7651247159998,-10.820903173295,-10.4366825938873,-10.3690665468568,-10.6608773673843,-10.703461079042,-11.1167445487895,-10.436490504683,-10.7931850479193,-10.7696333132921,-11.3036351868597,-11.1998716163323,-10.8416766882024,-10.728247539564,-10.5502409158795,-10.6331036366773,-10.9610189186494,-10.9773051843848,-10.9403690798834,-10.7542094741763,-10.7255777384373,-10.9612898565456,-10.8670549288722,-11.2831033431448,-10.8057147398128,-10.6248210798265,-10.3423873498234,-10.4791016177709,-10.5105915916996,-10.7888602616332,-10.9832376867362,-11.1068148641976) 
 # choosing to use filtered data, comment if you want to use the raw data
-# c-band data for entire study area non-filtered
-A_VH<-c(0.070706,0.071491,0.07024,0.064804,0.073184,0.074915,0.08479,0.091268,0.093464,0.100298,0.092861,0.08957,0.087574,0.082225,0.073671,0.073107,0.048293,0.083819,0.069603,0.075483,0.091785,0.095711,0.089678,0.082383,0.082269,0.076327,0.090214,0.08042,0.067319,0.073414,0.07478,0.08123,0.088796,0.096724,0.088383,0.086595,0.081231,0.079357,0.08508,0.090886,0.076536,0.081994,0.079037,0.083847,0.082777,0.090434,0.091853,0.085884,0.085046,0.077326,0.090438,0.083307,0.08376,0.074069,0.07586,0.082382,0.084562,0.0881,0.086435,0.080149,0.079849,0.080531,0.084058,0.084614,0.080144,0.081902,0.07442,0.083067,0.0866,0.092419,0.089555,0.088908,0.08339,0.07974,0.077503) 
-# choosing to use filtered data, comment if you want to use the raw data
-A_VH<-10*log10(abs(A_VH))
-
-A=A_VH
+A=Af
 
 x = c(1:length(A))  
 
@@ -39,8 +34,8 @@ sd_A19=sd(A2019)
 sd_A20=sd(A2020)
 
 # manual definition of peak coordinates
-peaks<-c(A2015[10],A2016[10],A2017[10],A2018[11],A2019[10],A2020[10])
-xpeaks<-c(10      ,10+12    ,10+12*2  ,11+12*3  ,10+12*4  ,10+12*5  )
+peaks<-c(A2015[7],A2016[7],A2017[7],A2018[8],A2019[7],A2020[7])
+xpeaks<-c(7      ,7+12    ,7+12*2  ,8+12*3  ,7+12*4  ,7+12*5  )
 
 
 #group means and stds into arrays for easy interpretation
@@ -76,13 +71,13 @@ plot(x, A,ylab="Backscattered Coefficient (DB)", lwd=2,cex.lab=3,cex.axis=2.5)
 #title(ylab="Backscattered Coefficient (DB)", mgp=c(-2.5,1,0), cex.lab=3)
 
 # draw vertical lines for Januaries
-abline(v=2,col="gray",lwd = 1.6)
-abline(v=14,col="gray",lwd = 1.6)
-abline(v=26,col="gray",lwd = 1.6)
-abline(v=38,col="gray",lwd = 1.6)
-abline(v=50,col="gray",lwd = 1.6)
-abline(v=62,col="gray",lwd = 1.6)
-abline(v=74,col="gray",lwd = 1.6)
+abline(v=1,col="gray",lwd = 1.6)
+abline(v=13,col="gray",lwd = 1.6)
+abline(v=25,col="gray",lwd = 1.6)
+abline(v=37,col="gray",lwd = 1.6)
+abline(v=49,col="gray",lwd = 1.6)
+abline(v=61,col="gray",lwd = 1.6)
+abline(v=73,col="gray",lwd = 1.6)
 
 # draw vertical dotted lines for Julies
 abline(v=7,col="gray",type="l",lty=3)
@@ -122,7 +117,7 @@ points(xm,ym, cex=.8, pch=3, col="darkgreen",lwd = 7)
 
 # draw legend table
  op <- par(cex = 2.3) # font size
-legend(x = "bottomright",  legend = c("Backscattered Coefficient - BC ", "Annual Mean BC", "Annual Peak BC", "Annual Standard Deviation of BC",  "Backscattered Coefficient", "Peak Blooming Trend (y=-10.221-0.0055x)", "Average Trend (y=-10.944+0.0026x)", "November", "April"), lty = c(0, 0,0, 1, 1, 1, 1, 1, 2), pch = c(1, 3, 4, NA, NA, NA, NA, NA, NA),  col = c("black","darkgreen", "green", "orange", "black", "green",  "blue","gray","gray"), lwd = c(2,2,2,5,2,2,1.3,1))     
+legend(x = "bottomright",  legend = c("Backscattered Coefficient - BC ", "Annual Mean BC", "Annual Peak BC", "Annual Standard Deviation of BC",  "Backscattered Coefficient", "Peak Blooming Trend (y=-10.221-0.0055x)", "Average Trend (y=-10.944+0.0026x)", "January", "July"), lty = c(0, 0,0, 1, 1, 1, 1, 1, 2), pch = c(1, 3, 4, NA, NA, NA, NA, NA, NA),  col = c("black","darkgreen", "green", "orange", "black", "green",  "blue","gray","gray"), lwd = c(2,2,2,5,2,2,1.3,1))     
 
 
 dev.off()

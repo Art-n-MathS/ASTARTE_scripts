@@ -202,13 +202,7 @@ for i in range(len(indexes)-1):
 
    MeteoValuesList+=[value]
 
-if len(indexes)==0:
-   print ("ERROR: No files found")
-   exit(1)
-
-
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
-
 favesPix.write  ("%s\n"%tail[IDS:(IDS+8)]) 
 favesPix.write  ("%s,"%zonesStr)  # zonesStr is the label of the 2nd column
 favesNoAve.write("%s\n"%tail[IDS:(IDS+8)]) 

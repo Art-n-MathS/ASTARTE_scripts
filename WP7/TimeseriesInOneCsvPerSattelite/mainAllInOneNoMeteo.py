@@ -149,12 +149,13 @@ outCsvDirNotCleaned=outCsvDir+"_notCleaned.csv"
 # opening/creating files
 favesPix  = open(outCsvDirPix  ,"w+")
 favesNoAve= open(outCSvDirNoAve,"w+")
-fmeteoOut = open(oitCSvDirMeto ,"w+")
+
 
 # Adding first label in files
 favesPix.write  ("Filenames,")
 favesNoAve.write("Filenames,")
-fmeteoOut.write ("Filenames,")
+
+
 
 # Loading file for meto data
 meteoDir      ="/home/milto/Documents/ASTARTE/ASTARTE_sample_data/Ave_DailyRain1992_2019_3days.csv"
@@ -167,17 +168,18 @@ meteoData=meteoLine.split(".")
 value=float(value)
 MeteoValuesList=[]
 
-# MeteoData = /home/milto/Documents/ASTARTE/ASTARTE_sample_data/Ave_DailyRain1992_2019_3days.csv
+
+
 
 #first line is the labels
 
-# exporting labels in csvs for average back coe, sum pixels, and meteo data
+# exporting labels in csvs for average back coe, sum pixels, 
 for i in range(len(indexes)-1):
    head, tail = os.path.split(csvFiles[indexes[i]])
    favesPix.write  ("%s,"% tail[IDS:(IDS+8)])
    favesNoAve.write("%s,"% tail[IDS:(IDS+8)])
-   fmeteoOut.write("%s,"% tail[IDS:(IDS+8)])
-   # Also creating a list with meteo corresponding data
+
+   # Also creating a list with  corresponding data
    value=0.0
    while (1 and date[8:10]): # day, month, year
       #print ("All: " , date, tail[17:25]) 
@@ -185,36 +187,19 @@ for i in range(len(indexes)-1):
       #print ("Month: " , date[3:5],tail[21:23])
       #print ("Year: " , date[8:10],tail[19:21])
       #print ("-------------------")
-      meteoLine=fMeteoData.readline()
-      if (meteoLine==""):
-         value=0.0
-         break
-      meteoLine=meteoLine[0:len(meteoLine)-2]
-      meteoData=str(meteoData)
-      meteoData=meteoLine.split(",")
-      [date,value]=meteoData
-      if(value==''):
-         value=0.0
-      else:
-         value=float(value)
+
+      value=float(value)
       if(date[0:2]==tail[(IDS+6):(IDS+8)] and date[3:5]==tail[(IDS+4):(IDS+6)] and date[8:10]==tail[(IDS+2):(IDS+4)]): 
          break
 
-   MeteoValuesList+=[value]
-
-if len(indexes)==0:
-   print ("ERROR: No files found")
-   exit(1)
 
 
 head, tail = os.path.split(csvFiles[indexes[len(indexes)-1]])
-
 favesPix.write  ("%s\n"%tail[IDS:(IDS+8)]) 
 favesPix.write  ("%s,"%zonesStr)  # zonesStr is the label of the 2nd column
 favesNoAve.write("%s\n"%tail[IDS:(IDS+8)]) 
 favesNoAve.write("%s,"%zonesStr)
-fmeteoOut.write("%s\n"%tail[IDS:(IDS+8)]) 
-fmeteoOut.write("%s,"%zonesStr)
+
 
 
 
@@ -225,24 +210,12 @@ while (1 and date[8:10]): # day, month, year
    #print ("Month: " , date[3:5],tail[21:23])
    #print ("Year: " , date[8:10],tail[19:21])
    #print ("-------------------")
-   meteoLine=fMeteoData.readline()
-   meteoLine=meteoLine[0:len(meteoLine)-2]
-   meteoData=str(meteoData)
-   meteoData=meteoLine.split(",")
-   if (meteoLine==""):
-      value=0.0
-      break
-   [date,value]=meteoData
-   if(value==''):
-      value=0.0
-   else:
-      value=float(value)
+
+   value=float(value)
    if(date[0:2]==tail[(IDS+6):(IDS+8)] and date[3:5]==tail[(IDS+4):(IDS+6)] and date[8:10]==tail[(IDS+2):(IDS+4)]): 
       break
       
-MeteoValuesList+=[value]
-   
-   
+ 
 
 
 
@@ -251,16 +224,15 @@ for i in range(len(indexes)-1):
    favesPix.write  ("%i,"%ListtPixes [indexes[i]])
    favesNoAve.write("%f,"%ListAveCoes[indexes[i]])
    
-   fmeteoOut.write("%f,"%MeteoValuesList[indexes[i]])
+
 favesPix.write("%i"%ListtPixes[indexes[len(indexes)-1]])
 favesNoAve.write("%f"%ListAveCoes[indexes[len(indexes)-1]])
 
-#fmeteoOut.write("%f"%MeteoValuesList[indexes[len(indexes)-1]])
+
 
 favesNoAve.close()
 favesPix.  close()
-fmeteoOut .close()
-fMeteoData.close()
+
 
 
 
@@ -282,19 +254,15 @@ while(1):
       YYYYC+=1
 
 
-# Define METEO THRESHOLD
-MeteoThres=7.1
 ListAveCoesClean=[] # -1000 for meteo below thres
 
 for i in range(len(ListAveCoes)):
-   if (MeteoValuesList[i]<MeteoThres):
       ListAveCoesClean+=[ListAveCoes[i]]
-   else:
-      ListAveCoesClean+=[-1000]
+  
       
 print ("ListAveCoesClean",ListAveCoesClean)
 print ("ListAveCoes",ListAveCoes)
-print ("MeteoValuesList",MeteoValuesList)
+
 
 i=0
 
@@ -337,7 +305,7 @@ faves1.write    ("%s - cleaned by Meteo"%zonesStr) # label of 2nd row
 for i in range(len(datesStr)):
       result=sumAves[i]
       if result > -999 :
-         faves1.write(",%5f"% (result))
+         faves1.write(",%5f"% (0))
       else:
          faves1.write(",")
 faves1.write("\n")
@@ -397,7 +365,6 @@ for i in range(len(datesStr)):
 
 print ("ListAveCoesClean",ListAveCoesClean)
 print ("ListAveCoes",ListAveCoes)
-print ("MeteoValuesList",MeteoValuesList)
 print ("sumAves2",sumAves2)
 print ("sumAves",sumAves)
 
